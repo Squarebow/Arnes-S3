@@ -21,7 +21,7 @@ function arnes_s3_settings() {
 	return [
 		'endpoint'      => get_option( 'arnes_s3_endpoint', 'https://shramba.arnes.si' ),
 		'bucket'        => get_option( 'arnes_s3_bucket', 'arnes-shramba' ),
-		'prefix'        => trim( get_option( 'arnes_s3_prefix', 'arnes-s3' ), '/' ),
+		'prefix'        => trim( get_option( 'arnes_s3_prefix', '' ), '/' ),
 		'org_id'        => get_option( 'arnes_s3_org_id', '' ),
 		'access_key'    => get_option( 'arnes_s3_access_key' ),
 		'secret_key'    => get_option( 'arnes_s3_secret_key' ),

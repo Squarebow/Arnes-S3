@@ -342,7 +342,7 @@ function arnes_s3_render_tab_povezava() {
 		</div>
 		
 		<!-- Desna stran: Navodila (50%) -->
-		<div style="flex: 0 0 48%; background: #f9f9f9; padding: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 48%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">Navodila za povezavo</h3>
 			
 			<p><strong>Kje najdem podatke za povezavo:</strong></p>
@@ -365,7 +365,7 @@ function arnes_s3_render_tab_povezava() {
 				<li>Vedno preverite povezavo pred shranjevanjem nastavitev!</li>
 			</ul>
 			
-			<p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
+			<p style="margin-top: 20px; margin-bottom: 0; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
 				<strong>Različica:</strong> Arnes S3 v<?php echo ARNES_S3_VERSION; ?>
 			</p>
 		</div>
@@ -663,7 +663,7 @@ function arnes_s3_render_tab_nastavitve() {
 		</div>
 		
 		<!-- Desna stran: Navodila (52%) -->
-		<div style="flex: 0 0 48%; background: #f9f9f9; padding: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 48%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">Navodila za nastavitve</h3>
 			
 			<h4>1. Samodejno nalaganje</h4>
@@ -730,7 +730,7 @@ function arnes_s3_render_tab_nastavitve() {
 				<p>Nekateri vtičniki optimizirane datoteke nalagajo v ločeno mapo, npr. <code>/wp-content/compressx-nextgen/</code>, ki je izven standardne WordPress uploads strukture. <strong>Arnes S3 vtičnik teh datoteke ne zaznava</strong>. Za brezhibno delovanje priporočamo, da druge vtičnike za optimizacijo slik deaktivirate.</p>
 			</div>
 			
-			<p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
+			<p style="margin-top: 20px; margin-bottom: 0; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
 				<strong>Različica:</strong> Arnes S3 v<?php echo ARNES_S3_VERSION; ?>
 			</p>
 		</div>
@@ -904,7 +904,7 @@ function arnes_s3_render_tab_mnozicno() {
 		</div>
 		
 		<!-- Desna stran: Navodila (40%) -->
-		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">ℹ️ Navodila</h3>
 			
 			<h4>Kako deluje množično nalaganje?</h4>
@@ -927,7 +927,7 @@ function arnes_s3_render_tab_mnozicno() {
 				<p><strong>Pomembno:</strong> Med množičnim nalaganjem ne zaprite te strani. Proces teče v ozadju in ga lahko kadarkoli pavzirate.</p>
 			</div>
 			
-			<p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
+			<p style="margin-top: 20px; margin-bottom: 0; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
 				<strong>Različica:</strong> Arnes S3 v<?php echo ARNES_S3_VERSION; ?>
 			</p>
 		</div>
@@ -1214,7 +1214,7 @@ function arnes_s3_render_tab_orodja() {
 		</div>
 		
 		<!-- Desna stran: Navodila (40%) -->
-		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">Navodila</h3>
 			
 			<h4>Backup Media Library</h4>
@@ -1251,7 +1251,7 @@ function arnes_s3_render_tab_orodja() {
 				<p><strong>Opozorilo:</strong> Varnostne kopije se shranjujejo na istem strežniku, kjer zavzemajo prostor na disku. Za popolno varnost jih prenesite na zunanje lokacije.</p>
 			</div>
 			
-			<p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
+			<p style="margin-top: 20px; margin-bottom: 0; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
 				<strong>Različica:</strong> Arnes S3 v<?php echo ARNES_S3_VERSION; ?>
 			</p>
 		</div>
@@ -1557,7 +1557,7 @@ function arnes_s3_render_tab_statistika() {
 		</div>
 		
 		<!-- Desna stran: Trenutne nastavitve (40%) -->
-		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">
 				<i class="fa-solid fa-gear arnes-icon"></i> Trenutne nastavitve
 			</h3>
@@ -1661,7 +1661,7 @@ function arnes_s3_render_tab_statistika() {
 			</div>
 			<?php endif; ?>
 			
-			<p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
+			<p style="margin-top: 20px; margin-bottom: 0; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
 				<strong>Različica:</strong> Arnes S3 v<?php echo ARNES_S3_VERSION; ?>
 			</p>
 		</div>
