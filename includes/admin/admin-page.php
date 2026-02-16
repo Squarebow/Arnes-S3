@@ -198,7 +198,7 @@ function arnes_s3_render_admin_page() {
 				<i class="fa-solid fa-sliders arnes-icon"></i>Nastavitve
 			</a>
 			<a href="?page=arnes-s3&tab=mnozicno" class="nav-tab <?php echo $active_tab === 'mnozicno' ? 'nav-tab-active' : ''; ?>">
-				<i class="fa-solid fa-cloud-arrow-up arnes-icon"></i>Množično nalaganje
+				<i class="fa-solid fa-cloud-arrow-up arnes-icon"></i>Nalaganje
 			</a>
 			<a href="?page=arnes-s3&tab=orodja" class="nav-tab <?php echo $active_tab === 'orodja' ? 'nav-tab-active' : ''; ?>">
 				<i class="fa-solid fa-toolbox arnes-icon"></i>Orodja
@@ -270,7 +270,7 @@ function arnes_s3_render_tab_povezava() {
 							       value="<?php echo esc_attr( $settings['endpoint'] ); ?>" 
 							       class="regular-text" 
 							       placeholder="https://shramba.arnes.si" />
-							<p class="description">URL naslov Arnes Shrambe. Privzeto: https://shramba.arnes.si</p>
+							<p class="description">URL naslov Arnes Shrambe (ne spreminjaj!)</p>
 						</td>
 					</tr>
 					<tr>
@@ -281,7 +281,7 @@ function arnes_s3_render_tab_povezava() {
 							<input type="text" id="arnes_s3_bucket" name="arnes_s3_bucket" 
 							       value="<?php echo esc_attr( $settings['bucket'] ); ?>" 
 							       class="regular-text" />
-							<p class="description">Ime bucket-a v Arnes Shrambi. Privzeto: arnes-shramba</p>
+							<p class="description">Ime bucketa v Arnes Shrambi. Privzeto: arnes-shramba</p>
 						</td>
 					</tr>
 					<tr>
@@ -292,7 +292,7 @@ function arnes_s3_render_tab_povezava() {
 							<input type="text" id="arnes_s3_prefix" name="arnes_s3_prefix" 
 							       value="<?php echo esc_attr( $settings['prefix'] ); ?>" 
 							       class="regular-text" />
-							<p class="description">Poljubna mapa v bucketu za organizacijo datotek, ki jo <br>ustvarite sami. Primer: vaša domena/slike ipd.</p>
+							<p class="description">Poljubna mapa v bucketu za organizacijo datotek, ki jo <br>ustvarite sami. Primer: moja-domena/slike ipd.</p>
 						</td>
 					</tr>
 					<tr>
@@ -303,7 +303,7 @@ function arnes_s3_render_tab_povezava() {
 							<input type="text" id="arnes_s3_org_id" name="arnes_s3_org_id" 
 							       value="<?php echo esc_attr( $settings['org_id'] ); ?>" 
 							       class="regular-text" />
-							<p class="description">Uporabniško ime vaše organizacije (številka).<br>Primer: 73</p>
+							<p class="description">Uporabniško ime vaše organizacije (številka) <br>najdete na Arnes Portalu članic.</p>
 						</td>
 					</tr>
 					<tr>
@@ -342,13 +342,13 @@ function arnes_s3_render_tab_povezava() {
 		</div>
 		
 		<!-- Desna stran: Navodila (50%) -->
-		<div style="flex: 0 0 48%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 48%; align-self: flex-start; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">Navodila za povezavo</h3>
 			
 			<p><strong>Kje najdem podatke za povezavo:</strong></p>
 			<ol>
 				<li>Prijavite se v <a href="https://portal.arnes.si" target="_blank">Arnes portal članic</a>, kjer so vsi podatki v razdelku Arnes shramba.</li>
-				<li>Ustvarite nov t.i. bucket (z orodjem Duplicati ali Min.io) oziroma uporabite obstoječega (arnes-shramba).</li>
+				<li>Uporabite obstoječ (arnes-shramba) ali ustvarite nov t.i. bucket (z orodjem Duplicati ali Min.io) oziroma.</li>
 				<li>Na <a href="https://spletna.shramba.arnes.si/" target="_blank">portalu Arnes Shramba</a> (za prijavo uporabite access in secret key) ustvarite strukturo map in podmap, kamor želite shranjevati vsebino.</li>
 				<li>V vsa polja na levi vpišite oziroma kopirajte podatke.</li>
 				<li>Kliknite gumb <strong>Preveri povezavo</strong> in po potrditvi, da povezava deluje, še <strong>Shrani spremembe</strong>.
@@ -361,7 +361,7 @@ function arnes_s3_render_tab_povezava() {
 			<p><strong>Priporočila za bucket:</strong></p>
 			<ul>
 				<li>Uporabite opisno ime (npr. <code>moja-domena-mediji</code>)</li>
-				<li>mape in mape uporabite uporabite za ločevanje projektov (npr. <code>spletna-stran/slike</code>)</li>
+				<li>Mape in podmape uporabite za ločevanje projektov (npr. <code>spletna-stran/slike</code>)</li>
 				<li>Vedno preverite povezavo pred shranjevanjem nastavitev!</li>
 			</ul>
 			
@@ -408,19 +408,19 @@ function arnes_s3_render_tab_nastavitve() {
 								<label>
 									<input type="radio" name="arnes_s3_auto_upload" value="1" 
 									       <?php checked( 1, (int) $settings['auto_upload'] ); ?> />
-									<strong>Samodejno naloži nove datoteke tudi v Arnes S3</strong>
+									<strong>Samodejno naloži nove datoteke v Arnes S3</strong>
 								</label>
 								<p class="description" style="margin: 5px 0 15px 25px;">
-									Ob nalaganju medijskih datotek v WP Knjižnico se bodo samodejno naložile v Arnes spletno shrambo.
+									Ob nalaganju medijskih datotek v WP knjižnico se bodo naložile tudi v Arnes spletno shrambo.
 								</p>
 								
 								<label>
 									<input type="radio" name="arnes_s3_auto_upload" value="0" 
 									       <?php checked( 0, (int) $settings['auto_upload'] ); ?> />
-									<strong>Ročno preko množičnega nalaganja</strong>
+									<strong>Ročno preko nalaganja</strong>
 								</label>
 								<p class="description" style="margin: 5px 0 0 25px;">
-									Datoteke se hranijo samo lokalno, dokler jih ročno ne naložite v S3 v zavihku "Množično nalaganje".
+									Datoteke se hranijo samo lokalno, dokler jih ročno ne naložite v S3 v zavihku "Nalaganje".
 								</p>
 							</fieldset>
 						</td>
@@ -447,7 +447,7 @@ function arnes_s3_render_tab_nastavitve() {
 					<!-- 3. NAČIN DOSTAVE DATOTEK -->
 					<tr>
 						<th scope="row" colspan="2" style="background: #f0f0f1; padding: 12px; padding-top: 30px;">
-							<strong style="font-size: 15px;">3. Način dostave datotek</strong>
+							<strong style="font-size: 15px;">3. Dostava datotek</strong>
 						</th>
 					</tr>
 					<tr>
@@ -465,7 +465,7 @@ function arnes_s3_render_tab_nastavitve() {
 								<label>
 									<input type="radio" name="arnes_s3_serve_mode" value="cdn" 
 									       <?php checked( $serve_mode, 'cdn' ); ?> />
-									<strong>Preko CDN</strong>
+									<strong>Uporabi CDN</strong>
 								</label>
 								<p class="description" style="margin: 5px 0 0 25px;">
 									Hitrejša dostava prek CDN omrežja (npr. Cloudflare).
@@ -486,7 +486,7 @@ function arnes_s3_render_tab_nastavitve() {
 						</td>
 					</tr>
 					
-					<!-- 4. NASTAVITVE KVALITETE SLIK -->
+					<!-- 4. NASTAVITVE KAKOVOSTI SLIK -->
 					<tr>
 						<th scope="row" colspan="2" style="background: #f0f0f1; padding: 12px; padding-top: 30px;">
 							<strong style="font-size: 15px;">4. Kakovost slik</strong>
@@ -514,7 +514,7 @@ function arnes_s3_render_tab_nastavitve() {
 							       class="small-text"
 							       style="margin-left: 10px; width: 60px;" />
 							<span style="margin-left: 5px;">%</span>
-							<p class="description">Privzeto: 82. Višja vrednost > boljša kvaliteta > večja datoteka.</p>
+							<p class="description">Privzeto: 82. Višja vrednost = boljša kakovost = večja datoteka.</p>
 						</td>
 					</tr>
 					<tr>
@@ -574,7 +574,7 @@ function arnes_s3_render_tab_nastavitve() {
 									<strong>💡 Priporočila</strong><br>
 									<strong>Visoka kakovost:</strong> 90-100 (najmanjša kompresija, največje datoteke)<br>
 									<strong>Optimalna kakovost:</strong> 82 (WordPress privzeto, odlično razmerje)<br>
-									<strong>Nizka kakovost:</strong> 60-80 (večja kompresija, manjše datoteke, še vedno sprejemljiva kvaliteta)
+									<strong>Nizka kakovost:</strong> 60-80 (večja kompresija, manjše datoteke, še vedno sprejemljiva kakovost)
 								</p>
 							</div>
 						</td>
@@ -663,39 +663,38 @@ function arnes_s3_render_tab_nastavitve() {
 		</div>
 		
 		<!-- Desna stran: Navodila (52%) -->
-		<div style="flex: 0 0 48%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 48%; align-self: flex-start; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">Navodila za nastavitve</h3>
 			
 			<h4>1. Samodejno nalaganje</h4>
 			<p>Izberite ali naj se nove datoteke, ki jih naložite v WP knjižnici, samodejno nalagajo tudi v Arnes S3 ali ne.</p>
 			<ul>
-				<li><strong>Samodejno:</strong> Vsaka nova datoteka naložena v Knjižnici se takoj naloži v S3. <strong>Priporočeno za večino uporabnikov</strong>.</li>
+				<li><strong>Samodejno:</strong> Vsaka nova datoteka naložena v Knjižnici se takoj naloži v oblak. <strong>Priporočeno za večino uporabnikov</strong>.</li>
 				<li><strong>Ročno:</strong> Nove datoteke ostanejo samo lokalno. To je lahko uporabno za:
 					<ul>
 						<li> - t.i. batch-upload strategijo (naložiš več datotek lokalno, nato množično naložiš vse naenkrat)</li>
-						<li> - Testiranje funkcionalnosti množičnega nalaganja</li>
+						<li> - Testiranje funkcionalnosti nalaganja</li>
 						<li> - Kontrolirano nalaganje (sami izberete, kdaj se datoteke nalagajo v Arnes shrambo)</li>
 					</ul>
 				</li>
 			</ul>
 			
 			<div class="notice notice-info inline" style="margin: 15px 0;">
-				<p><strong>💡 Namig:</strong> Če želite testirati "Množično nalaganje" po tem, ko so vse datoteke že v S3, izključite avtomatsko nalaganje, naložite nekaj testnih datotek in izvedite množično nalaganje.</p>
+				<p><strong>💡 Namig:</strong> Če želite testirati "Nalaganje" po tem, ko so vse datoteke že v S3, izključite avtomatsko nalaganje, naložite nekaj testnih datotek in izvedite nalaganje.</p>
 			</div>
 			
 			<h4>2. Ohrani lokalne datoteke</h4>
 			<p>Ko je ta možnost omogočena, so vse medijske datoteke shranjene <strong>tako v Arnes S3 kot lokalno</strong> na vašem WordPress strežniku.</p>
 			<ul>
 				<li><strong>Prednost:</strong> Varnostna kopija - če Arnes shramba ni dosegljiva, so datoteke še vedno na strežniku</li>
-				<li><strong>Slabost:</strong> Nepotrebna poraba diskovnega prostora na strežniku</li>
+				<li><strong>Slabost:</strong> Nepotrebna poraba prostora na strežniku</li>
 			</ul>
 			
-			<h4>3. Način dostave datotek</h4>
-			<p>Izberite kako želite dostavljati medijske datoteke obiskovalcem. Izbor vpliva na prikaz URLjev slik in drugih medijskih datotek na vaši spletni strani. Primer URLjev v brskalniku:
-			<br>Če izberete Arnes <code>https://shramba.arnes.si/.../ime-slike.jpg</code> oziroma če izberete CDN <code>https://cdn.moja-domena.si/.../ime-slike.jpg</code></p>
+			<h4>3. Dostava datotek</h4>
+			<p>Izberite kako želite dostavljati medijske datoteke obiskovalcem. Izbor vpliva na prikaz URLjev slik in drugih medijskih datotek na vaši spletni strani. Primer URLjev v brskalniku: Če izberete Arnes <code>https://shramba.arnes.si/.../ime-slike.jpg</code> oziroma če izberete CDN <code>https://cdn.moja-domena.si/.../ime-slike.jpg</code></p>
 			<ul>
 				<li><strong>Direktno iz Arnes S3:</strong> Datoteke se dostavljajo direktno iz Arnes Shramba strežnikov. Najboljša možnost za manjše strani.</li>
-				<li><strong>Prek CDN:</strong> Hitrejša dostava prek CDN omrežja (npr. Cloudflare). Priporočeno za večje strani z mednarodnim občinstvom.</li>
+				<li><strong>Uporabi CDN:</strong> Hitrejša dostava prek CDN omrežja (npr. Cloudflare). Priporočeno za večje strani z mednarodnim občinstvom.</li>
 			</ul>
 			
 			<p><strong>Primer nastavitev pri ponudniku Cloudflare:</strong></p>
@@ -703,11 +702,11 @@ function arnes_s3_render_tab_nastavitve() {
 				<li>V Cloudflare računu dodajte CNAME zapis: <code>cdn.vasa-domena.si</code> → <code>shramba.arnes.si</code></li> (namesto cdn lahko izberete poljubno poddomeno)
 				<li>Omogočite "Proxy" (oranžen oblak)</li>
 				<li>IZBIRNO - Ustvarite Cache Rule: <code>cdn.vasa-domena.si/*</code> → Eligible for Cache, Respect origin TTL</li>
-				<li>Izberite "Prek CDN" zgoraj in vnesite: <code>https://cdn.vasa-domena.si</code></li>
+				<li>Izberite "Uporabi CDN" zgoraj in vnesite: <code>https://cdn.vasa-domena.si</code></li>
 			</ol>
 			
-			<h4>4. Nastavitve kvalitete slik</h4>
-			<p>Nastavite kvaliteto kompresije za različne slikovne formate:</p>
+			<h4>4. Kakovost slik</h4>
+			<p>Nastavite kakovost kompresije za različne slikovne formate:</p>
 			<ul>
 				<li><strong>JPEG kakovost:</strong> Nastavitev kompresije za JPEG slike (1-100). Privzeto: 82</li>
 				<li><strong>WebP kakovost:</strong> Nastavitev kompresije za WebP format. Privzeto: 82</li>
@@ -739,7 +738,7 @@ function arnes_s3_render_tab_nastavitve() {
 }
 
 /**
- * Tab 3: Množično nalaganje
+ * Tab 3: Nalaganje
  */
 function arnes_s3_render_tab_mnozicno() {
 	// Podatki za zadnjo bulk upload operacijo
@@ -752,7 +751,7 @@ function arnes_s3_render_tab_mnozicno() {
 			<!-- KORAK 1: Scan Options -->
 			<div class="postbox">
 				<div class="inside" style="padding: 20px;">
-					<h3 style="margin-top: 0;">1. Nastavitve skeniranja</h3>
+					<h3 style="margin-top: 0;">1. Nastavitve pregleda</h3>
 					
 					<table class="form-table" role="presentation">
 						<tr>
@@ -768,7 +767,7 @@ function arnes_s3_render_tab_mnozicno() {
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">Tip datotek</th>
+							<th scope="row">Vrste datotek</th>
 							<td>
 								<select id="arnes-s3-filter-mime-type" class="regular-text">
 									<option value="all">Vse datoteke</option>
@@ -799,7 +798,7 @@ function arnes_s3_render_tab_mnozicno() {
 								</label>
 								<label style="display: block;">
 									<input type="checkbox" id="arnes-s3-dry-run" value="1" />
-									Predogled brez nalaganja (t.i. Dry-run mode)
+									Predogled (t.i. Dry-run mode)
 								</label>
 							</td>
 						</tr>
@@ -807,22 +806,22 @@ function arnes_s3_render_tab_mnozicno() {
 					
 					<p class="submit">
 						<button type="button" id="arnes-s3-scan-btn" class="button button-primary button-large">
-							Skeniraj Knjižnico
+							Preglej knjižnico
 						</button>
 					</p>
 					
 					<?php if ( $last_result ) : ?>
 						<div class="notice notice-success inline" style="margin: 20px 0;">
 							<p>
-								<strong>📊 Zadnje množično nalaganje:</strong><br>
+								<strong>Zadnje nalaganje:</strong><br>
 								<span style="margin-left: 25px;">
-									✅ Naloženo: <strong><?php echo number_format( $last_result['success_count'] ); ?></strong> datotek
+									Naloženo: <strong><?php echo number_format( $last_result['success_count'] ); ?></strong> datotek
 									<?php if ( $last_result['error_count'] > 0 ) : ?>
-										| ❌ Napake: <strong><?php echo number_format( $last_result['error_count'] ); ?></strong>
+										| Napake: <strong><?php echo number_format( $last_result['error_count'] ); ?></strong>
 									<?php endif; ?>
 									<br>
-									📅 Datum: <?php echo date_i18n( 'd.m.Y H:i', strtotime( $last_result['date'] ) ); ?>
-									| ⏱ Trajanje: <?php echo gmdate( 'i:s', $last_result['duration'] ); ?> min
+									Datum: <?php echo date_i18n( 'd.m.Y H:i', strtotime( $last_result['date'] ) ); ?>
+									| Trajanje: <?php echo gmdate( 'i:s', $last_result['duration'] ); ?> min
 								</span>
 							</p>
 						</div>
@@ -882,13 +881,13 @@ function arnes_s3_render_tab_mnozicno() {
 						
 						<p class="submit" style="margin-top: 20px;">
 							<button type="button" id="arnes-s3-pause-btn" class="button button-secondary button-large">
-								⏸ Premor
+								Premor
 							</button>
 							<button type="button" id="arnes-s3-resume-btn" class="button button-secondary button-large" style="display: none;">
-								▶ Nadaljuj
+								Nadaljuj
 							</button>
 							<button type="button" id="arnes-s3-cancel-btn" class="button button-large" style="margin-left: 10px;">
-								✕ Prekliči
+								Prekliči
 							</button>
 						</p>
 					</div>
@@ -898,33 +897,33 @@ function arnes_s3_render_tab_mnozicno() {
 			<!-- Start Upload Button (prikazan po skeniranju) -->
 			<p class="submit" style="margin-top: 20px;">
 				<button type="button" id="arnes-s3-start-upload-btn" class="button button-primary button-large" disabled>
-					Začni množično nalaganje
+					Začni nalaganje
 				</button>
 			</p>
 		</div>
 		
 		<!-- Desna stran: Navodila (40%) -->
-		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
-			<h3 style="margin-top: 0;">ℹ️ Navodila</h3>
+		<div style="flex: 0 0 38%; align-self: flex-start; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+			<h3 style="margin-top: 0;">Navodila</h3>
 			
-			<h4>Kako deluje množično nalaganje?</h4>
+			<h4>Kako deluje nalaganje?</h4>
 			<ol>
-				<li><strong>Skenirajte medijsko knjižnico:</strong> Vtičnik bo pregledal vse medijske datoteke glede na izbrane filtre.</li>
+				<li><strong>Preglej medijsko knjižnico:</strong> Vtičnik bo pregledal vse medijske datoteke glede na izbrane filtre.</li>
 				<li><strong>Preglej rezultate:</strong> Videli boste, koliko datotek bo naloženih in njihovo skupno velikost.</li>
-				<li><strong>Začni nalaganje:</strong> Kliknite "Začni množično nalaganje" za začetek.</li>
+				<li><strong>Začni nalaganje:</strong> Kliknite "Začni nalaganje" za začetek.</li>
 				<li><strong>Spremljajte napredek:</strong> Trak prikazuje status nalaganja v realnem času.</li>
 			</ol>
 			
 			<h4>Pomembne opombe:</h4>
 			<ul>
-				<li><strong>Nadaljuj funkcionalnost:</strong> Če nalaganje prekinete ali zaprjete okno, lahko nadaljujete kasneje.</li>
-				<li><strong>Dry-run mode:</strong> Uporabite za predogled datotek brez dejanskega nalaganja.</li>
+				<li><strong>Nadaljuj:</strong> Če nalaganje prekinete ali zaprjete okno, lahko nadaljujete kasneje.</li>
+				<li><strong>Predogled:</strong> Uporabite to možnost za predogled datotek brez dejanskega nalaganja.</li>
 				<li><strong>Samo manjkajoče datoteke:</strong> Privzeto se naložijo samo datoteke, ki še niso v Arnes spletni shrambi (prepreči podvajanje).</li>
-				<li><strong>Batch processing:</strong> Datoteke se nalagajo v batch-ih po 10 za optimalno hitrost in stabilnost.</li>
+				<li><strong>Procesiranje serij:</strong> Datoteke se nalagajo v serijah po deset za optimalno hitrost in stabilnost.</li>
 			</ul>
 			
 			<div class="notice notice-warning inline" style="margin: 20px 0;">
-				<p><strong>Pomembno:</strong> Med množičnim nalaganjem ne zaprite te strani. Proces teče v ozadju in ga lahko kadarkoli pavzirate.</p>
+				<p><strong>Pomembno:</strong> Med nalaganjem ne zaprite te strani. Proces teče v ozadju in ga lahko kadarkoli ustavite, prekinete ali nadaljujete.</p>
 			</div>
 			
 			<p style="margin-top: 20px; margin-bottom: 0; padding-top: 15px; border-top: 1px solid #dcdcde; color: #646970; font-size: 13px;">
@@ -962,21 +961,21 @@ function arnes_s3_render_tab_orodja() {
 			<!-- SEKCIJA 1: Backup Media Library -->
 			<div class="postbox">
 				<div class="inside" style="padding: 20px;">
-					<h3 style="margin-top: 0;">Varnostna kopija knjižnice (backup)</h3>
+					<h3 style="margin-top: 0;">Arhiviranje medijske knjižnice</h3>
 					<p>Ustvarite varnostno kopijo celotne medijske knjižnice v ZIP arhiv.</p>
 					
 					<table class="form-table" role="presentation">
 						<tr>
-							<th scope="row">Vir datotek</th>
+							<th scope="row">Kaj želite arhivirati</th>
 							<td>
 								<fieldset>
 									<label style="display: block; margin-bottom: 8px;">
 										<input type="radio" name="backup_source" value="local" checked />
-										<strong>Lokalne datoteke</strong> - Backup datotek, shranjenih na WordPress strežniku
+										<strong>Lokalne datoteke</strong> - Arhivira datoteke, shranjenih na WordPress strežniku
 									</label>
 									<label style="display: block;">
 										<input type="radio" name="backup_source" value="s3" />
-										<strong>S3 datoteke</strong> - Backup datotek, ki so v Arnes oblaku
+										<strong>Datoteke v Arnes oblaku</strong> - Arhivira datoteke, ki so v Arnes oblaku
 									</label>
 								</fieldset>
 							</td>
@@ -995,7 +994,7 @@ function arnes_s3_render_tab_orodja() {
 									</label>
 									<label style="display: block; margin-bottom: 5px;">
 										<input type="checkbox" class="backup-file-type" value="font" checked />
-										Fonti (WOFF, WOFF2, TTF, OTF)
+										Tipografije (WOFF, WOFF2, TTF, OTF)
 									</label>
 									<label style="display: block; margin-bottom: 5px;">
 										<input type="checkbox" class="backup-file-type" value="video" checked />
@@ -1006,27 +1005,27 @@ function arnes_s3_render_tab_orodja() {
 										Ostalo (vsi drugi tipi)
 									</label>
 								</fieldset>
-								<p class="description">Izberite katere vrste datotek želite vključiti v backup.</p>
+								<p class="description">Izberite katere vrste datotek želite vključiti v arhiv.</p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">Vključi</th>
+							<th scope="row">Dodatno</th>
 							<td>
 								<label>
 									<input type="checkbox" id="backup_include_optimized" value="1" checked />
 									Vključi sličice za predogled (thumbnails) in optimizirane slike (WebP in AVIF)
 								</label>
-								<p class="description">Če je omogočeno, bodo v backup vključene vse različice slik.</p>
+								<p class="description">Če je omogočeno, bodo v arhiv vključene vse različice slik.</p>
 							</td>
 						</tr>
 					</table>
 					
 					<p class="submit">
 						<button type="button" id="arnes-s3-backup-scan-btn" class="button button-secondary button-large">
-							Skeniraj datoteke
+							Preglej datoteke
 						</button>
 						<button type="button" id="arnes-s3-backup-create-btn" class="button button-primary button-large" style="margin-left: 10px;" disabled>
-							Ustvari backup
+							Ustvari arhiv
 						</button>
 					</p>
 					
@@ -1038,7 +1037,7 @@ function arnes_s3_render_tab_orodja() {
 						<div style="background: #f0f0f1; height: 30px; border-radius: 4px; overflow: hidden; margin-bottom: 15px;">
 							<div id="arnes-s3-backup-progress-bar" style="background: #2271b1; height: 100%; width: 0%; transition: width 0.3s;"></div>
 						</div>
-						<p id="arnes-s3-backup-status">Ustvarjam backup...</p>
+						<p id="arnes-s3-backup-status">Ustvarjam arhiv ...</p>
 					</div>
 				</div>
 			</div>
@@ -1047,7 +1046,7 @@ function arnes_s3_render_tab_orodja() {
 			<?php if ( ! empty( $existing_backups ) ) : ?>
 			<div class="postbox" style="margin-top: 20px;">
 				<div class="inside" style="padding: 20px;">
-					<h3 style="margin-top: 0;">Obstoječi backupi</h3>
+					<h3 style="margin-top: 0;">Obstoječi arhivi</h3>
 					
 					<table class="widefat striped">
 						<thead>
@@ -1055,7 +1054,7 @@ function arnes_s3_render_tab_orodja() {
 								<th>Ime datoteke</th>
 								<th>Velikost</th>
 								<th>Datum</th>
-								<th>Akcije</th>
+								<th>Dejanja</th>
 							</tr>
 						</thead>
 						<tbody id="arnes-s3-backup-list">
@@ -1085,7 +1084,7 @@ function arnes_s3_render_tab_orodja() {
 			<!-- SEKCIJA 3: Restore iz S3 -->
 			<div class="postbox" style="margin-top: 20px;">
 				<div class="inside" style="padding: 20px;">
-					<h3 style="margin-top: 0;">Obnova arhiva iz Arnes shrambe</h3>
+					<h3 style="margin-top: 0;">Obnova arhiva iz Arnes oblaka</h3>
 					<p>Prenesite datoteke iz Arnes oblaka nazaj na lokalni WordPress strežnik.</p>
 					
 					<table class="form-table" role="presentation">
@@ -1133,9 +1132,13 @@ function arnes_s3_render_tab_orodja() {
 						</tr>
 					</table>
 					
+					<div class="notice notice-warning inline" style="margin: 20px 0;">
+				<p><strong>Opozorilo:</strong> Pred obnovo datotek iz oblaka VEDNO ustvarite varnostno kopijo datotek in podatkovne baze z namenskim WP orodjem!.</p>
+			</div>
+					
 					<p class="submit">
 						<button type="button" id="arnes-s3-restore-scan-btn" class="button button-secondary button-large">
-							Skeniraj datoteke v Arnes oblaku
+							Preglej datoteke v oblaku
 						</button>
 						<button type="button" id="arnes-s3-restore-start-btn" class="button button-primary button-large" style="margin-left: 10px;" disabled>
 							Začni obnovo
@@ -1165,11 +1168,11 @@ function arnes_s3_render_tab_orodja() {
 					<!-- Sub-sekcija 1: Re-sync S3 Metadata -->
 					<div style="border-left: 3px solid #2271b1; padding-left: 15px; margin-bottom: 25px;">
 						<h4 style="margin-top: 0;">Sinhroniziraj metapodatke</h4>
-						<p>Poišči priponke, ki imajo datoteke v oblaku vendar nimajo <code>_arnes_s3_object</code> post meta in popravi metapodatke.</p>
+						<p>Poišči medijske datoteke v Arnes oblaku, ki nimajo <code>_arnes_s3_object</code> post meta atributa in popravi metapodatke.</p>
 						
 						<p class="submit" style="margin-top: 10px;">
 							<button type="button" id="arnes-s3-sync-scan-btn" class="button button-secondary">
-								Skeniraj za manjkajoče metapodatke
+								Preveri metapodatke
 							</button>
 							<button type="button" id="arnes-s3-sync-fix-btn" class="button button-primary" style="margin-left: 10px;" disabled>
 								Popravi metapodatke
@@ -1182,11 +1185,15 @@ function arnes_s3_render_tab_orodja() {
 					<!-- Sub-sekcija 2: Bulk Delete lokalnih kopij -->
 					<div style="border-left: 3px solid #d63638; padding-left: 15px; margin-bottom: 25px;">
 						<h4 style="margin-top: 0;">Brisanje lokalne kopije</h4>
-						<p>Izbriši lokalne kopije vseh datotek ki so že varno shranjene v Arnes S3 (prihrani prostor na disku).</p>
+						<p>Izbriši lokalne kopije vseh datotek, ki so že varno shranjene v Arnes S3 (prihrani prostor na disku).</p>
+						
+						<div class="notice notice-warning inline" style="margin: 20px 0;">
+				<p><strong>Opozorilo:</strong> Pred brisanjem lokalnih kopij VEDNO ustvarite varnostno kopijo datotek in podatkovne baze z namenskim WP orodjem!.</p>
+			</div>
 						
 						<p class="submit" style="margin-top: 10px;">
 							<button type="button" id="arnes-s3-local-delete-scan-btn" class="button button-secondary">
-								Skeniraj datoteke
+								Preglej datoteke
 							</button>
 							<button type="button" id="arnes-s3-local-delete-btn" class="button button-primary" style="margin-left: 10px;" disabled>
 								Izbriši lokalne kopije
@@ -1199,7 +1206,7 @@ function arnes_s3_render_tab_orodja() {
 					<!-- Sub-sekcija 3: Preverjanje integritete -->
 					<div style="border-left: 3px solid #00a32a; padding-left: 15px;">
 						<h4 style="margin-top: 0;">Preverjanje integritete</h4>
-						<p>Preveri usklajenost med lokalnimi datotekami in datotekami v oblaku (velikost, obstoječe datoteke).</p>
+						<p>Preveri usklajenost med lokalnimi datotekami in datotekami v oblaku.</p>
 						
 						<p class="submit" style="margin-top: 10px;">
 							<button type="button" id="arnes-s3-integrity-check-btn" class="button button-secondary">
@@ -1214,16 +1221,16 @@ function arnes_s3_render_tab_orodja() {
 		</div>
 		
 		<!-- Desna stran: Navodila (40%) -->
-		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 38%; align-self: flex-start; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">Navodila</h3>
 			
-			<h4>Backup Media Library</h4>
+			<h4>Arhiviranje medijske knjižnice</h4>
 			<p>Ustvarite ZIP arhiv celotne medijske knjižnice za varnostno kopijo.</p>
 			<ol>
 				<li>Izberite vir datotek (lokalne ali oblak)</li>
 				<li>Izberite vrste datotek za vključitev</li>
-				<li>Kliknite "Skeniraj datoteke"</li>
-				<li>Preglejte rezultate in kliknite "Ustvari varnostno kopijo"</li>
+				<li>Kliknite "Preglej datoteke"</li>
+				<li>Preglejte rezultate in kliknite "Ustvari arhiv"</li>
 				<li>Prenesite ZIP datoteko</li>
 			</ol>
 			
@@ -1232,7 +1239,7 @@ function arnes_s3_render_tab_orodja() {
 			<ol>
 				<li>Izberite način obnovitve (samo manjkajoče ali vse)</li>
 				<li>Izberite vrste datotek</li>
-				<li>Kliknite "Skeniraj S3 datoteke"</li>
+				<li>Kliknite "Preglej datoteke"</li>
 				<li>Preglejte rezultate in kliknite "Začni obnovo"</li>
 				<li>Počakajte na konec</li>
 			</ol>
@@ -1240,10 +1247,10 @@ function arnes_s3_render_tab_orodja() {
 			<h4>Zakaj WebP/AVIF datoteke niso vidne lokalno v medijski knjižnici?</h4>
 			<p>Če imate izključeno možnost "Ohrani lokalne datoteke" (zavihek Nastavitve):</p>
 			<ul>
-				<li>WordPress generira WebP/AVIF ob nalaganju slike</li>
-				<li>Vtičnik jih naloži v Arnes oblak</li>
-				<li>Vtičnik izbriše lokalne kopije (da prihrani prostor)</li>
-				<li>Slike se strežejo direktno iz Arnes shrambe/CDN</li>
+				<li>- WordPress generira WebP/AVIF ob nalaganju slike</li>
+				<li>- Vtičnik jih naloži v Arnes oblak</li>
+				<li>- Vtičnik izbriše lokalne kopije (da prihrani prostor)</li>
+				<li>- Slike se strežejo direktno iz Arnes shrambe/CDN</li>
 			</ul>
 			<p><strong>Datoteke so varne v S3, lokalni disk pa je prost</strong>.</p>
 			
@@ -1557,7 +1564,7 @@ function arnes_s3_render_tab_statistika() {
 		</div>
 		
 		<!-- Desna stran: Trenutne nastavitve (40%) -->
-		<div style="flex: 0 0 38%; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
+		<div style="flex: 0 0 38%; align-self: flex-start; background: #f9f9f9; padding: 20px; padding-bottom: 20px; border: 1px solid #dcdcde; border-radius: 4px;">
 			<h3 style="margin-top: 0;">
 				<i class="fa-solid fa-gear arnes-icon"></i> Trenutne nastavitve
 			</h3>
