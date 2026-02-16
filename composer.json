@@ -1,0 +1,19 @@
+{
+    "name": "squarebow/arnes-s3",
+    "description": "WordPress plugin for Arnes S3 media offloading",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4",
+        "aws/aws-sdk-php": "^3.369"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
+        "apcu-autoloader": false,
+        "platform-check": false
+    },
+    "autoload": {
+        "files": []
+    }
+}
