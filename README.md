@@ -598,7 +598,7 @@ Icons now load from CDN and work on all domains. If still not showing:
 
 - **Documentation:** This README
 - **GitHub Issues:** [Report bugs or request features](https://github.com/yourusername/arnes-s3/issues)
-- **Email:** support@squarebow.com
+- **Email:** info@squarebow.com
 - **Arnes Support:** For S3 credential issues, contact Arnes directly
 
 ### Before Asking for Help
