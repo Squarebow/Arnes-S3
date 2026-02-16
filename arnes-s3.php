@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Arnes S3
- * Description: Samodejno nalaganje WordPress medijskih datotek v Arnes Shrambo, CDN podpora in URL rewriting.
- * Version: 1.0.7
+ * Description: Samodejno nalaganje WordPress medijskih datotek v Arnes Shrambo (S3-compatible storage).
+ * Version: 1.0.8
  * Author: SquareBow
  * License: GPL-2.0-or-later
  * Requires at least: 6.5
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 define( 'ARNES_S3_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ARNES_S3_URL', plugin_dir_url( __FILE__ ) );
-define( 'ARNES_S3_VERSION', '1.0.7' );
+define( 'ARNES_S3_VERSION', '1.0.8' );
 
 /**
  * Vključi AWS SDK in core komponente
@@ -70,6 +70,6 @@ function arnes_s3_activation() {
 		add_option( 'arnes_s3_auto_upload', 1 );
 	}
 	
-	// Izvedi diagnostiko sistema (image support, zaznaj vtičnike)
+	// Izvedi diagnostiko sistema (image support, zaznaj optimization vtičnike)
 	arnes_s3_run_diagnostics();
 }
