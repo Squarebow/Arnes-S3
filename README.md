@@ -142,12 +142,12 @@ Existing WordPress media offloading plugins (like WP Offload Media) only support
 
 ### Method 1: WordPress Admin (Recommended)
 
-1. Download the latest `arnes-s3-v107.zip`
+1. Download the latest plugin version `arnes-s3-v108.zip` under Code > Download ZIP or [click here](https://github.com/Squarebow/Arnes-S3/archive/refs/heads/main.zip)
 2. Go to **WordPress Admin → Plugins → Add New**
 3. Click **Upload Plugin**
 4. Choose the ZIP file and click **Install Now**
 5. Click **Activate Plugin**
-6. Set it up in WP Admin under Media > **Arnes S3**
+6. Set it up in WP Admin under Media (Predstavnost in Slovenian) > **Arnes S3**
 
 ### Method 2: Manual Installation
 
@@ -160,7 +160,7 @@ Existing WordPress media offloading plugins (like WP Offload Media) only support
 ### Method 3: WP-CLI
 
 ```bash
-wp plugin install arnes-s3-v107.zip --activate
+wp plugin install arnes-s3-v108.zip --activate
 ```
 
 ---
@@ -169,17 +169,16 @@ wp plugin install arnes-s3-v107.zip --activate
 
 ### Step 1: Get Arnes Shramba Credentials
 
-1. Log in to [Arnes Shramba](https://shramba.arnes.si)
-2. Go to your organization settings
-3. Generate S3 API credentials
-4. Note your **Organization ID** (e.g., `73`, `26`, etc.)
-5. Copy your **Access Key** and **Secret Key**
+1. Log in to [Arnes Portal članic](https://portal.arnes.si/portal/login)
+2. Find your organization settings under Arnes Shramba
+3. Note your **Organization ID** (e.g., `73`, `26`, etc.)
+4. Copy your **Access Key** and **Secret Key**
 
 ### Step 2: Create Bucket/Folder
 
 **Important:** The plugin does NOT create buckets or folders automatically.
 
-1. Using MinIO Client, Cyberduck, or Arnes web interface
+1. Create a new bucket using MinIO Client or Cyberduck
 2. Navigate to bucket: `arnes-shramba`
 3. Create your folder/prefix (e.g., `your-domain`)
 
@@ -189,7 +188,7 @@ wp plugin install arnes-s3-v107.zip --activate
 2. Go to **Povezava (Connection)** tab
 3. Fill in the fields:
    - **S3 Endpoint:** `https://shramba.arnes.si`
-   - **Bucket:** `arnes-shramba`
+   - **Bucket:** `arnes-shramba` (this is the default one, no need to create a new bucket)
    - **Folder/Prefix:** `your-domain` (the folder you created)
    - **Organization ID:** Your numeric org ID (e.g., `73`)
    - **Access Key:** Your S3 access key
@@ -419,23 +418,21 @@ Quick view of active configuration:
 #### Step 2: Create CDN Subdomain
 1. Go to **DNS** in Cloudflare
 2. Add **CNAME** record:
-   - **Name:** `cdn` (or `assets`, `media`)
-   - **Target:** `shramba.arnes.si`
+   - **Name:** `cdn` (or `assets`, `media`, whatever you like)
+   - **Target/Points to:** `shramba.arnes.si`
    - **Proxy status:** ✅ **Proxied** (orange cloud)
    - **TTL:** Auto
 
-#### Step 3: Configure Cache Rules
+#### Step 3: Configure Cache Rules (OPTIONAL but recommended)
 1. Go to **Caching → Cache Rules**
 2. Create rule:
    - **Name:** "Cache Media Files"
    - **Match:** `cdn.yourdomain.com/*`
-   - **Then:** Cache Level: **Cache Everything**
-   - **Edge Cache TTL:** 1 month
-   - **Browser Cache TTL:** 1 day
+   - **Rules:** Eligible for Cache, Respect origin TTL
 
 #### Step 4: Configure Plugin
 1. Go to **Tab 2 (Nastavitve)**
-2. Select **Via CDN**
+2. Select **Uporabi CDN**
 3. Enter: `https://cdn.yourdomain.com`
 4. Save changes
 
@@ -606,7 +603,7 @@ Icons now load from CDN and work on all domains. If still not showing:
 Please provide:
 1. WordPress version
 2. PHP version
-3. Plugin version (currently 1.0.7)
+3. Plugin version (currently 1.0.8)
 4. Error messages (from debug.log)
 5. Steps to reproduce issue
 6. Browser console errors (if frontend issue)
@@ -625,7 +622,7 @@ Please provide:
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-### Latest Version: 1.0.7 (2026-02-13)
+### Latest Version: 1.0.8 (2026-02-17)
 
 **Critical Fixes:**
 - ✅ Fixed endpoint default to include `https://`
@@ -705,6 +702,6 @@ Follow [WordPress Coding Standards](https://developer.wordpress.org/coding-stand
 
 **Made with ❤️ for the Slovenian WordPress community**
 
-**Version:** 1.0.7  
-**Last Updated:** February 16th, 2026  
+**Version:** 1.0.8  
+**Last Updated:** February 17th, 2026  
 **Status:** Production Ready ✅
