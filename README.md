@@ -142,7 +142,7 @@ Obstoječi vtičniki za odlaganje medijev WordPress (npr. WP Offload Media) podp
 
 ### Metoda 1: WordPress Admin (priporočeno)
 
-1. Prenesite najnovejšo različico vtičnika - Public stable release oziroma pod gumbom Code > Download ZIP ali [kliknite tukaj](https://github.com/Squarebow/Arnes-S3/archive/refs/heads/main.zip)
+1. Prenesite najnovejšo različico vtičnika - Code > Download ZIP ali [kliknite tukaj](https://github.com/Squarebow/Arnes-S3/releases/download/v1.0.8/Arnes-S3-v108.zip)
 2. Pojdite na **WordPress Admin → Plugins → Add New**
 3. Kliknite **Upload Plugin**
 4. Izberite ZIP datoteko in kliknite **Install Now**
