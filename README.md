@@ -1,163 +1,163 @@
-# Arnes S3 - WordPress Media Offloading Plugin
+# Arnes S3 - WordPress Media Offloading vtičnik
 
-**Automatic WordPress media upload to Arnes Shramba (Slovenia's S3-compatible cloud storage)**
+**Vtičnik za samodejno ali ročno nalaganje medijskih datotek iz WordPressa v Arnes Web Storage (generični AWS S3 bucket). Podpira CDN, sodobne oblike slik (WebP in AVIF), varnostne kopije in obnovitev iz arhivov.**
 
-[![Version](https://img.shields.io/badge/version-1.0.8-blue.svg)]()
+[![Različica](https://img.shields.io/badge/version-1.0.8-blue.svg)]()
 [![WordPress](https://img.shields.io/badge/wordpress-6.5%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/php-7.4%2B-purple.svg)](https://php.net/)
-[![License](https://img.shields.io/badge/license-GPL--2.0-green.svg)](LICENSE)
+[![Licence](https://img.shields.io/badge/license-GPL--2.0-green.svg)](LICENCE)
 
 ---
 
-## 📖 Table of Contents
+## 📖 Kazalo
 
-- [About](#about)
-- [Why This Plugin?](#why-this-plugin)
-- [Key Features](#key-features)
-- [System Requirements](#system-requirements)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage Guide](#usage-guide)
-- [CDN Integration](#cdn-integration)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
-
----
-
-## About
-
-**Arnes S3** is a WordPress plugin that automatically uploads your media files (images, PDFs, videos, fonts) to **Arnes Shramba**, Slovenia's national S3-compatible object storage service provided by Arnes (Academic and Research Network of Slovenia).
-
-The plugin seamlessly integrates with WordPress Media Library, allowing you to:
-- ✅ Offload media files to cloud storage to save disk space
-- ✅ Serve files directly from S3 or via CDN for faster delivery
-- ✅ Bulk upload existing media library to S3
-- ✅ Monitor storage usage with comprehensive statistics
-- ✅ Backup and restore your entire media library
+- [O vtičniku](#about)
+- [Zakaj ta vtičnik?](#why-this-plugin)
+- [Ključne funkcije](#key-features)
+- [Sistemske zahteve](#system-requirements)
+- [Namestitev](#installation)
+- [Konfiguracija](#configuration)
+- [Navodila za uporabo](#usage-guide)
+- [Integracija CDN](#cdn-integration)
+- [Pogosta vprašanja](#faq)
+- [Podpora](#support)
+- [Licenca](#license)
 
 ---
 
-## Why This Plugin?
+## O vtičniku
 
-Existing WordPress media offloading plugins (like WP Offload Media) only support major cloud providers:
+**Arnes S3** je vtičnik za WordPress, ki samodejno naloži vaše medijske datoteke (slike, PDF-je, videoposnetke, pisave) v **Arnes Shramba**, slovensko nacionalno storitev za shranjevanje objektov, združljivo s S3, ki jo zagotavlja Arnes (Akademsko-raziskovalna mreža Slovenije).
+
+Vtičnik se brezhibno integrira v medijsko knjižnico WordPress, kar vam omogoča:
+- ✅ Prenos medijskih datotek v oblak za shranjevanje, da prihranite prostor na disku.
+- ✅ Prenos datotek neposredno iz S3 ali prek CDN za hitrejšo dostavo.
+- ✅ Množični prenos obstoječe medijske knjižnice v S3.
+- ✅ Spremljanje porabe prostora za shranjevanje s celovitimi statistikami.
+- ✅ Varnostno kopiranje in obnovitev celotne medijske knjižnice.
+
+---
+
+## Zakaj ta vtičnik?
+
+Obstoječi vtičniki za odlaganje medijev WordPress (npr. WP Offload Media) podpirajo le večje ponudnike storitev v oblaku:
 - ❌ AWS S3
 - ❌ Google Cloud Storage
-- ❌ DigitalOcean Spaces
+- ❌ DigitalOcean Spaces ipd.
 
-**They do NOT support custom S3 endpoints** which requires:
-- Custom endpoint (`shramba.arnes.si`)
-- Organization ID in URL structure
-- Folder-based organization (not multiple buckets)
+**NE podpirajo prilagojenih končnih točk S3**, ki zahtevajo:
+- Prilagojeno končno točko (`shramba.arnes.si`)
+- ID organizacije v strukturi URL-ja
+- Organizacija na podlagi map (ne več košaric)
 
-**This plugin was specifically built to support Arnes Shramba's unique infrastructure.**
-
----
-
-## Key Features
-
-### 🚀 Automatic Upload
-- Automatically uploads new media files to Arnes S3 when uploaded via WordPress
-- Supports all media types: images, PDFs, videos, audio, fonts
-- Uploads all WordPress-generated sizes (thumbnails, WebP, AVIF)
-
-### 📁 Bulk Upload
-- Upload ALL existing media library files to S3 with one click
-- Real-time progress tracking with visual progress bar
-- Filter by date range, file type, or size
-- Upload only missing files or overwrite all
-- Pause/Resume functionality
-- Detailed upload statistics
-
-### 🌐 URL Rewriting & CDN Support
-- Serve files directly from Arnes S3
-- Optional CDN integration (Cloudflare, etc.)
-- Automatic URL rewriting for `<img>`, `<picture>`, and srcset
-- Works with page builders and custom themes
-
-### 💾 Storage Management
-- Choose to keep or delete local files after upload
-- Save up to 90%+ disk space by removing local copies
-- Files safely stored in Arnes S3
-
-### 🛠️ Backup & Restore
-- Create ZIP backups of entire media library
-- Backup from local files or directly from S3
-- Download and restore files from S3 to local server
-- Essential for disaster recovery
-
-### 🔄 Sync & Maintenance Tools
-- Re-sync metadata for files in S3
-- Verify file integrity between local and S3
-- Bulk delete local copies of files already in S3
-- Fix missing metadata automatically
-
-### 📊 Comprehensive Statistics
-- Total files in WordPress vs S3
-- File type breakdown (images, documents, videos, etc.)
-- Storage size calculations
-- Coverage percentage with visual progress bars
-- Last bulk upload statistics
-
-### 🎨 Image Quality Control
-- Adjust JPEG, WebP, and AVIF compression levels
-- Choose format priority (WebP-first or AVIF-first)
-- WordPress-native image processing
-- Balance quality vs file size
-
-### 🌍 Multisite Compatible
-- Works with WordPress Multisite networks
-- Each site gets its own folder structure
-- Separate statistics per site
-
-### 🇸🇮 Slovenian Interface
-- Fully translated Slovenian UI
-- Professional admin interface with Font Awesome icons
-- WordPress-native styling
+**Ta vtičnik je bil razvit za podporo edinstvene infrastrukture Arnes Shramba.**
 
 ---
 
-## System Requirements
+## Ključne značilnosti
 
-### Minimum Requirements
-- **WordPress:** 6.5 or higher
-- **PHP:** 7.4 or higher
-- **Arnes Shramba:** Active account with S3 credentials
-- **PHP Extensions:** `curl`, `json`, `mbstring`, `xml`
+### 🚀 Samodejno nalaganje
+- Samodejno nalaganje novih medijskih datotek v Arnes S3, ko so naložene prek WordPressa
+- Podpira vse vrste medijev: slike, PDF-je, videoposnetke, avdio datoteke, pisave
+- Naloži vse velikosti, ki jih ustvari WordPress (miniature, WebP, AVIF)
 
-### Recommended
+### 📁 Množično nalaganje
+- Naloži VSE obstoječe datoteke iz medijske knjižnice v S3 z enim klikom
+- Sledenje napredka v realnem času z vizualnim kazalnikom napredka
+- Filtriraj po datumu, vrsti datoteke ali velikosti
+- Prenesite samo manjkajoče datoteke ali prepišite vse
+- Funkcija zaustavitve/nadaljevanja
+- Podrobne statistike prenosa
+
+### 🌐 Prepisovanje URL-jev in podpora CDN
+- Datoteke se prenašajo neposredno iz Arnes S3
+- Izbirna integracija CDN (Cloudflare itd.)
+- Samodejno prepisovanje URL-jev za `<img>`, `<picture>` in srcset
+- Deluje z orodji za ustvarjanje strani (page builders) in prilagojenimi temami
+
+### 💾 Upravljanje shranjevanja
+- Izberite, ali želite lokalne datoteke po nalaganju obdržati ali izbrisati.
+- Prihranite do 90 % prostora na disku z odstranitvijo lokalnih kopij.
+- Datoteke so varno shranjene v Arnes S3.
+
+### 🛠️ Varnostno kopiranje in obnova
+- Ustvarite ZIP varnostne kopije celotne medijske knjižnice.
+- Varnostno kopirajte iz lokalnih datotek ali neposredno iz S3.
+- Prenesite in obnovite datoteke iz S3 na lokalni strežnik
+- Nujno za obnovo po nezgodi
+
+### 🔄 Orodja za sinhronizacijo in vzdrževanje
+- Ponovno sinhronizirajte metapodatke za datoteke v S3
+- Preverite celovitost datotek med lokalno in S3 hrambo
+- Množično izbrišite lokalne kopije datotek, ki so že v S3
+- Samodejno popravite manjkajoče metapodatke
+
+### 📊 Izčrpne statistike
+- Skupno število datotek v WordPressu v primerjavi s S3
+- Razčlenitev po vrstah datotek (slike, dokumenti, videi itd.)
+- Izračuni velikosti shranjevanja
+- Odstotek pokritosti z vizualnimi kazalniki napredka
+- Statistični podatki o zadnjem množičnem nalaganju
+
+### 🎨 Nadzor kakovosti slik
+- Prilagajanje stopenj stiskanja JPEG, WebP in AVIF
+- Izbiranje prednosti formata (najprej WebP ali najprej AVIF)
+- Obdelava slik v WordPressu
+- Uravnoteženje kakovosti in velikosti datotek
+
+### 🌍 Združljivost z WP multisite omrežji
+- Deluje z omrežji WordPress Multisite (blog_id)
+- Vsaka spletna stran dobi svojo strukturo map
+- Ločene statistike za vsako spletno stran
+
+### 🇸🇮 Slovenski vmesnik
+- Popolnoma preveden slovenski uporabniški vmesnik
+- Profesionalni administrativni vmesnik z ikonami Font Awesome
+- WordPress privzeto oblikovanje
+
+---
+
+## Sistemske zahteve
+
+### Minimalne zahteve
+- **WordPress:** 6.5 ali višja različica
+- **PHP:** 7.4 ali višja različica
+- **Arnes Shramba:** Aktivni račun s S3 poverilnicami
+- **PHP razširitve:** `curl`, `json`, `mbstring`, `xml`, `imagick`
+
+### Priporočeno
 - **WordPress:** 6.9+
 - **PHP:** 8.0+
-- **Image Library:** Imagick (for WebP/AVIF support)
-- **Memory:** 256MB+ PHP memory limit
+- **Knjižnica slik:** Imagick (za podporo WebP/AVIF)
+- **Pomnilnik:** 256 MB+ omejitev pomnilnika PHP
 
-### Server Requirements
-- Write permissions on `/wp-content/uploads/`
-- Ability to make external HTTPS connections
-- WP-Cron enabled (for bulk operations)
+### Zahteve strežnika
+- Dovoljenja za pisanje v `/wp-content/uploads/`
+- Možnost vzpostavitve zunanjih HTTPS povezav
+- Omogočen WP-Cron (za množične operacije)
 
 ---
 
-## Installation
+## Namestitev
 
-### Method 1: WordPress Admin (Recommended)
+### Metoda 1: WordPress Admin (priporočeno)
 
-1. Download the latest plugin version `arnes-s3-v108.zip` under Code > Download ZIP or [click here](https://github.com/Squarebow/Arnes-S3/archive/refs/heads/main.zip)
-2. Go to **WordPress Admin → Plugins → Add New**
-3. Click **Upload Plugin**
-4. Choose the ZIP file and click **Install Now**
-5. Click **Activate Plugin**
-6. Set it up in WP Admin under Media (Predstavnost in Slovenian) > **Arnes S3**
+1. Prenesite najnovejšo različico vtičnika - Public stable release oziroma pod gumbom Code > Download ZIP ali [kliknite tukaj](https://github.com/Squarebow/Arnes-S3/archive/refs/heads/main.zip)
+2. Pojdite na **WordPress Admin → Plugins → Add New**
+3. Kliknite **Upload Plugin**
+4. Izberite ZIP datoteko in kliknite **Install Now**
+5. Kliknite **Activate Plugin**
+6. Nastavite ga v WP Admin pod Media (Predstavnost v slovenščini) > **Arnes S3**
 
-### Method 2: Manual Installation
+### Metoda 2: Ročna namestitev
 
-1. Download and unzip the plugin
-2. Upload the `arnes-s3` folder to `/wp-content/plugins/`
-3. Go to **Plugins** in WordPress admin
-4. Find "Arnes S3" and click **Activate**
-5. Set it up in WP Admin under Media > **Arnes S3**
+1. Prenesite in razširite vtičnik.
+2. Naložite mapo `arnes-s3` v `/wp-content/plugins/`.
+3. V WordPress adminu odprite **Plugins**.
+4. Poiščite »Arnes S3« in kliknite **Activate**.
+5. Nastavite ga v WP Admin pod Media > **Arnes S3**.
 
-### Method 3: WP-CLI
+### Metoda 3: WP-CLI
 
 ```bash
 wp plugin install arnes-s3-v108.zip --activate
@@ -165,496 +165,477 @@ wp plugin install arnes-s3-v108.zip --activate
 
 ---
 
-## Configuration
+## Konfiguracija
 
-### Step 1: Get Arnes Shramba Credentials
+### Korak 1: Pridobite poverilnice Arnes Shramba
 
-1. Log in to [Arnes Portal članic](https://portal.arnes.si/portal/login)
-2. Find your organization settings under Arnes Shramba
-3. Note your **Organization ID** (e.g., `73`, `26`, etc.)
-4. Copy your **Access Key** and **Secret Key**
+1. Prijavite se v [Arnes Portal članic](https://portal.arnes.si/portal/login)
+2. Poiščite nastavitve svoje organizacije pod Arnes Shramba
+3. Zapišite si **ID organizacije**, ki je navedeno kot uporabniško ime organizacije (številka)
+4. Kopirajte **ključ za dostop** in **skrivni ključ**
 
-### Step 2: Create Bucket/Folder
+### Korak 2: mapo oziroma pot
 
-**Important:** The plugin does NOT create buckets or folders automatically.
+**Pomembno:** Vtičnik NE ustvari zbirke ali mape samodejno.
 
-1. Create a new bucket using MinIO Client or Cyberduck
-2. Navigate to bucket: `arnes-shramba`
-3. Create your folder/prefix (e.g., `your-domain`)
+1. Ustvarite novo mapo v spletnem vmesniku [Arnes Spletna shramba](https://spletna.shramba.arnes.si/). Za vpis uporabite access in secret key.
+2. Kliknite "Nova mapa" in jo poimenujte (priporočamo ime vaše domene ali organizacije, npr. `moja-domena`).
+3. Pomaknite se v novo mapo in ustvarite novo mapo, kamor se bodo shranjevale medijske datoteke (npr. slike ali spletna-stran)
+4. Pot, kamor se bodo nalagale datoteke, vpišete v vtičnik v polje mapa/pot (npr. moja-domena/slike)
 
-### Step 3: Configure Plugin
+### Korak 3: Konfigurirajte vtičnik
 
-1. Go to **WordPress Admin → Media → Arnes S3**
-2. Go to **Povezava (Connection)** tab
-3. Fill in the fields:
-   - **S3 Endpoint:** `https://shramba.arnes.si`
-   - **Bucket:** `arnes-shramba` (this is the default one, no need to create a new bucket)
-   - **Folder/Prefix:** `your-domain` (the folder you created)
-   - **Organization ID:** Your numeric org ID (e.g., `73`)
-   - **Access Key:** Your S3 access key
-   - **Secret Key:** Your S3 secret key
-4. Click **Preveri povezavo (Test Connection)**
-5. If successful, click **Shrani spremembe (Save Changes)**
-
----
-
-## Usage Guide
-
-### Tab 1: Povezava (Connection)
-
-**Purpose:** Configure S3 connection credentials
-
-**Fields:**
-- **S3 Endpoint:** Arnes Shramba URL (default: `https://shramba.arnes.si`)
-- **Bucket:** Root bucket name (default: `arnes-shramba`)
-- **Folder/Prefix:** Your custom folder inside the bucket
-- **Organization ID:** Your organization's numeric identifier
-- **Access Key:** S3 authentication key
-- **Secret Key:** S3 secret key
-
-**Actions:**
-- **Test Connection:** Verifies credentials and bucket access
-- **Save Changes:** Saves configuration to database
+1. Pojdite na **WordPress Admin → Predstavnost → Arnes S3**
+2. Pojdite na zavihek **Povezava (Connection)**
+3. Izpolnite polja:
+   - **S3 Endpoint:** `https://shramba.arnes.si` (predizpolnjen, NE SPREMINJAJTE)
+   - **Bucket:** `arnes-shramba` (privzeto, pustite ime, če niste ustvarjali novega bucketa)
+   - **Mapa/pot:** `moja-domena` (mapa, ki ste jo ustvarili)
+   - **ID organizacije:** Uporabniško ime organizacije (številka) v Arnes portalu članic / Arnes Shramba
+   - **Ključ za dostop:** Vaš ključ za dostop do S3
+   - **Skrivni ključ:** Vaš skrivni ključ za S3
+4. Kliknite **Preveri povezavo**
+5. Če je povezava uspešna, kliknite **Shrani spremembe**
 
 ---
 
-### Tab 2: Nastavitve (Settings)
+### Zavihek 2: Nastavitve (Settings)
 
-**Purpose:** Control plugin behavior
+**Namen:** Nadzor delovanja vtičnika
 
-#### Automatic Upload
-- ✅ **Enable:** New files automatically upload to S3
-- ⬜ **Disable:** Files stay local (manual upload via Bulk Upload)
+#### Samodejno nalaganje
+- ✅ **Omogoči:** Nove datoteke se samodejno naložijo v S3.
+- ⬜ **Onemogoči:** Datoteke ostanejo lokalno (ročno nalaganje prek množičnega nalaganja).
 
-#### Keep Local Files
-- ✅ **Enable:** Files exist in BOTH S3 and local server (redundancy)
-- ⬜ **Disable:** Files ONLY in S3 (saves disk space)
+#### Ohrani lokalne datoteke
+- ✅ **Omogoči:** Datoteke obstajajo tako v S3 kot na lokalnem strežniku (podvajanje).
+- ⬜ **Onemogoči:** Datoteke so SAMO v S3 (prihrani prostor na disku)
 
-**Recommendation:**
-- Enable during migration for safety
-- Disable after confirming everything works to save space
+**Priporočilo:**
+- Vklopite med ročno migracijo zaradi varnosti.
+- Izklopite po potrditvi, da vse deluje, da prihranite prostor.
 
-#### File Delivery Method
-- **From Arnes S3:** Files served directly from `shramba.arnes.si`
-- **Via CDN:** Files served through your CDN domain (faster, custom domain)
+#### Način dostave datotek
+- **Iz Arnes S3:** Datoteke se prenašajo neposredno iz `shramba.arnes.si`
+- **Prek CDN:** datoteke se prenašajo prek vaše domene CDN (hitrejše, prilagojena domena)
 
-#### Image Quality
-Adjust compression levels:
-- **JPEG Quality:** 1-100% (default: 82%)
-- **WebP Quality:** 1-100% (default: 82%)
-- **AVIF Quality:** 1-100% (default: 82%)
+#### Kakovost slike
+Prilagodite stopnje stiskanja:
+- **Kakovost JPEG:** 1–100 % (privzeto: 82 %)
+- **Kakovost WebP:** 1–100 % (privzeto: 82 %)
+- **Kakovost AVIF:** 1–100 % (privzeto: 82 %)
 
-**Guidelines:**
-- 90-100%: Excellent quality, large files
-- 80-89%: Great quality, reasonable size ✅ **Recommended**
-- 70-79%: Good quality, smaller files
-- <70%: Visible quality loss
+**Smernice:**
+- 90–100 %: odlična kakovost, velike datoteke
+- 80–89 %: odlična kakovost, razumna velikost ✅ **Priporočeno**
+- 70–79 %: dobra kakovost, manjše datoteke
+- <70 %: vidna izguba kakovosti
 
-#### Image Format Priority
-- **WebP → AVIF:** WordPress default, maximum compatibility (~97% browsers)
-- **AVIF → WebP:** Better compression (~90% browsers)
-
----
-
-### Tab 3: Množično nalaganje (Bulk Upload)
-
-**Purpose:** Upload existing media library files to S3
-
-#### How It Works
-1. **Scan Library:** Plugin scans all WordPress media files
-2. **Filter Files:** Choose which files to upload
-3. **Upload:** Files uploaded in batches (10 at a time)
-4. **Track Progress:** Real-time progress bar and statistics
-
-#### Filtering Options
-- **Date Range:** Upload files from specific time period
-- **File Type:** Images, PDFs, Videos, Audio, etc.
-- **File Size:** Min/max size in MB
-- **Upload Mode:**
-  - **Missing Only:** Upload only files NOT in S3 (recommended)
-  - **All Files:** Upload everything (overwrites existing)
-
-#### Dry Run Mode
-Test upload without actually uploading files:
-- ✅ Shows which files would be uploaded
-- ✅ No files actually uploaded
-- ✅ Safe way to test filters
-
-#### Progress Features
-- Real-time progress bar
-- Current file name
-- Upload speed (files/second)
-- Estimated time remaining
-- Success/Error counters
-- **Pause/Resume:** Stop and continue later
-- **Cancel:** Abort upload
-
-#### Resume Functionality
-If interrupted (browser closed, internet drops):
-1. Return to Bulk Upload tab
-2. Click **Resume** button
-3. Upload continues from where it stopped
+#### Prednostni vrstni red slikovnih formatov
+- **WebP → AVIF:** privzeta nastavitev WordPressa, največja združljivost (~97 % brskalnikov)
+- **AVIF → WebP:** boljša kompresija (~90 % brskalnikov)
 
 ---
 
-### Tab 4: Orodja (Tools)
+### Zavihek 3: Nalaganje (Bulk Upload)
 
-**Purpose:** Advanced management tools
+**Namen:** nalaganje obstoječih datotek iz medijske knjižnice v S3
 
-#### 1. Backup Media Library
+#### Kako deluje
+1. **Pregled knjižnice:** Vtičnik pregleda vse datoteke medijev WordPress
+2. **Filtriranje datotek:** Izberite datoteke, ki jih želite naložiti
+3. **Nalaganje:** Datoteke se nalagajo v paketih (po 10 naenkrat)
+4. **Sledenje napredku:** Napredek in statistika v realnem času
 
-Create ZIP archive of entire media library.
+#### Možnosti filtriranja
+- **Časovno obdobje:** Naložite datoteke iz določenega časovnega obdobja
+- **Vrsta datoteke:** Slike, PDF-ji, videi, avdio datoteke itd.
+- **Velikost datoteke:** minimalna/maksimalna velikost v MB
+- **Način nalaganja:**
+  - **Samo manjkajoče:** naložite samo datoteke, ki niso v S3 (priporočeno)
+  - **Vse datoteke:** naložite vse (prepiše obstoječe)
 
-**Options:**
-- **Source:**
-  - From Local Files
-  - From Arnes S3
-- **File Types:** Images, Documents, Fonts, Videos, Other
+#### Predogled (dry-run)
+Preizkusite nalaganje brez dejanskega nalaganja datotek:
+- ✅ Prikaže, katere datoteke bi bile naložene
+- ✅ Datoteke dejansko niso naložene
+- ✅ Varen način za testiranje filtrov
 
-**Process:**
-1. Select source and file types
-2. Click **Scan Files**
-3. Review count and size
-4. Click **Create Backup**
-5. Download ZIP when ready
+#### Spremljanje napredka
+- Napredek v realnem času
+- Trenutno ime datoteke
+- Hitrost nalaganja (datoteke/sekundo)
+- Predvideni preostali čas
+- Števci uspešnosti/napak
+- **Premor/Nadaljevanje:** Zaustavite in nadaljujte kasneje
+- **Prekliči:** Prekini nalaganje
 
-**⚠️ Warning:** Backups stored on server (uses disk space). Download externally for true safety.
-
-#### 2. Restore from Arnes S3
-
-Download files from S3 back to local server.
-
-**Modes:**
-- **Missing Only:** Download only files that don't exist locally
-- **All Files:** Download everything (overwrites existing)
-
-**When to Use:**
-- After deleting local files to save space
-- Migrating to new server
-- Before deactivating plugin
-- After accidental file deletion
-
-#### 3. Sync & Maintenance
-
-**Re-sync Metadata:**
-- Fixes files in S3 without WordPress metadata
-- Updates database with S3 file locations
-
-**Delete Local Copies:**
-- Bulk delete local files that exist in S3
-- Verifies S3 existence before deleting
-- Saves disk space
-
-**Verify Integrity:**
-- Check consistency between local and S3
-- File existence and size validation
-- Identify corrupted files
+#### Funkcija nadaljevanja
+Če pride do prekinitve (zaprtje brskalnika, izpad interneta):
+1. Vrnite se na zavihek Bulk Upload (Množično nalaganje)
+2. Kliknite gumb **Resume** (Nadaljuj)
+3. Nalaganje se nadaljuje od tam, kjer se je ustavilo
 
 ---
 
-### Tab 5: Statistika (Statistics)
+### Zavihek 4: Orodja
 
-**Purpose:** Monitor storage usage and coverage
+**Namen:** Napredna orodja za upravljanje
 
-**Note:** Statistics only appear AFTER configuring S3 credentials.
+#### 1. Varnostna kopija medijske knjižnice
 
-#### Overview Section
-- Total media files in WordPress
-- Files uploaded to S3 (count + percentage)
-- Files only on local server
-- Visual progress bar showing S3 coverage
+Ustvarite ZIP arhiv celotne medijske knjižnice.
 
-#### File Type Breakdown
-Table showing statistics per file type:
-- Images, Documents, Videos, Audio, Text, Fonts, Other
-- Total count, In S3, Local only
-- Coverage percentage with color-coded bars:
-  - 🟢 Green (≥80%): Excellent coverage
-  - 🟡 Yellow (50-79%): Good coverage
-  - 🔴 Red (<50%): Poor coverage
+**Možnosti:**
+- **Vir:**
+  - Iz lokalnih datotek
+  - Iz Arnes S3
+- **Vrste datotek:** Slike, dokumenti, pisave, videi, drugo
 
-#### Storage Size
-- Total size of local files
-- Approximate size in S3
-- Potential space savings (if "keep local" is OFF)
+**Postopek:**
+1. Izberite vir in vrste datotek.
+2. Kliknite **Preglej datoteke**.
+3. Preverite število in velikost.
+4. Kliknite **Ustvari varnostno kopijo**.
+5. Ko je pripravljeno, prenesite ZIP.
 
-#### Last Bulk Upload
-Statistics from most recent bulk upload:
-- Date and time
-- Total files processed
-- Successfully uploaded
-- Errors (if any)
-- Execution time
+**⚠️ Opozorilo:** Varnostne kopije so shranjene na strežniku (uporabljajo prostor na disku). Za resnično varnost jih prenesite na lokalni disk.
 
-#### Current Settings
-Quick view of active configuration:
-- S3 connection details
-- Auto-upload status
-- Keep local status
-- Delivery method (S3/CDN)
-- Image quality settings
+#### 2. Obnovitev iz Arnes S3 oblaka
+
+Prenesite datoteke iz S3 nazaj na lokalni strežnik.
+
+**Načini:**
+- **Samo manjkajoče:** prenesite samo datoteke, ki lokalno ne obstajajo
+- **Vse datoteke:** prenesite vse (prepiše obstoječe)
+
+**Kdaj uporabiti:**
+- Po brisanju lokalnih datotek, da prihranite prostor
+- Pri selitvi na nov strežnik
+- Pred deaktiviranjem vtičnika
+- Po naključnem izbrisu datotek
+
+#### 3. Sinhronizacija in vzdrževanje
+
+**Ponovna sinhronizacija metapodatkov:**
+- Popravi datoteke v S3 brez metapodatkov WordPressa
+- Posodobi bazo podatkov z lokacijami datotek S3
+
+**Izbriši lokalne kopije:**
+- Množično izbriše lokalne datoteke, ki obstajajo v S3
+- Preveri obstoj S3 pred izbrisom
+- Prihrani prostor na disku
+
+**Preveri integriteto:**
+- Preveri skladnost med lokalnim in S3
+- Preveri obstoj datotek in velikost
+- Prepozna poškodovane datoteke
 
 ---
 
-## CDN Integration
+### Zavihek 5: Statistika
 
-### Why Use CDN?
+**Namen:** Spremljanje porabe prostora za shranjevanje in pokritosti
 
-**Benefits:**
-- ⚡ Faster loading (files from nearest location)
-- 🌍 Global reach (CDN nodes worldwide)
-- 📉 Reduced S3 costs (caching)
-- 🔒 DDoS protection
-- 🎯 Custom domain (`cdn.yourdomain.com`)
+**Opomba:** Statistika se prikaže šele PO konfiguraciji poverilnic v zavihku nastavitve.
 
-### Cloudflare Setup (Free Plan)
+#### Pregled
+- Skupno število datotek v WordPressu
+- Datoteke, naložene v S3 (število + odstotek)
+- Datoteke, ki so samo na lokalnem strežniku
+- Vizualni indikator napredka, ki prikazuje pokritost S3
 
-#### Step 1: Add Domain to Cloudflare
-1. Sign up at [Cloudflare](https://cloudflare.com)
-2. Add your domain
-3. Update nameservers at domain registrar
-4. Wait for DNS propagation (5-60 minutes)
+#### Razčlenitev po vrsti datotek
+Tabela s statističnimi podatki po vrsti datotek:
+- Slike, dokumenti, videi, avdio, besedilo, pisave, drugo
+- Skupno število, v S3, samo lokalno
+- Odstotek pokritosti z barvnimi indikatorji:
+  - 🟢 Zelena (≥80 %): odlično pokritost
+  - 🟡 Rumena (50–79 %): dobra pokritost
+  - 🔴 Rdeča (<50 %): slaba pokritost
+  
+  #### Velikost pomnilnika
+- Skupna velikost lokalnih datotek
+- Približna velikost v S3
+- Možni prihranki prostora (če je možnost »ohrani lokalno« izklopljena)
 
-#### Step 2: Create CDN Subdomain
-1. Go to **DNS** in Cloudflare
-2. Add **CNAME** record:
-   - **Name:** `cdn` (or `assets`, `media`, whatever you like)
-   - **Target/Points to:** `shramba.arnes.si`
-   - **Proxy status:** ✅ **Proxied** (orange cloud)
-   - **TTL:** Auto
+#### Zadnje množično nalaganje
+Statistika zadnjega množičnega nalaganja:
+- Datum in čas
+- Skupno število obdelanih datotek
+- Uspešno naloženo
+- Napake (če obstajajo)
+- Čas izvedbe
 
-#### Step 3: Configure Cache Rules (OPTIONAL but recommended)
-1. Go to **Caching → Cache Rules**
-2. Create rule:
+#### Trenutne nastavitve
+Hiter pregled aktivne konfiguracije:
+- Podrobnosti povezave S3
+- Stanje samodejnega nalaganja
+- Stanje ohranjanja lokalno
+- Način dostave (S3/CDN)
+- Nastavitve kakovosti slike
+
+---
+
+## Integracija CDN
+
+### Zakaj uporabljati CDN?
+
+**Prednosti:**
+- ⚡ Hitrejše nalaganje (datoteke iz najbližje lokacije)
+- 🌍 Globalni doseg (CDN vozlišča po vsem svetu)
+- 📉 Nižji stroški S3 (caching)
+- 🔒 Zaščita pred DDoS
+- 🎯 Prilagojena domena (`cdn.yourdomain.com`)
+
+### Nastavitev Cloudflare (brezplačni račun)
+
+#### Korak 1: Dodajte domeno v Cloudflare
+1. Registrirajte se na [Cloudflare](https://cloudflare.com)
+2. Dodajte svojo domeno
+3. Posodobite imenske strežnike pri registratorju domen
+4. Počakajte na razširitev DNS (5–60 minut)
+
+#### Korak 2: Ustvarite poddomeno CDN
+1. V Cloudflare odprite **DNS**
+2. Dodajte zapis **CNAME**:
+   - **Ime:** `cdn` (`cdn` je le primer. Uporabite lahko `assets`, `media` ... karkoli želite)
+   - **Cilj/Kaže na:** `shramba.arnes.si`
+   - **Stanje proxyja:** ✅ **Proxied** (oranžni oblak)
+   - **TTL:** Samodejno
+
+#### Korak 3: Konfigurirajte pravila za predpomnilnik (NEOBVEZNO, vendar priporočljivo)
+1. Pojdite na **Caching → Cache Rules**
+2. Ustvarite pravilo:
    - **Name:** "Cache Media Files"
    - **Match:** `cdn.yourdomain.com/*`
    - **Rules:** Eligible for Cache, Respect origin TTL
+   
+   #### Korak 4: Konfigurirajte vtičnik
+1. Pojdite na **Zavihek 2 (Nastavitve)**.
+2. Izberite **Uporabi CDN**.
+3. Vnesite: `https://cdn.yourdomain.com`.
+4. Shranite spremembe.
 
-#### Step 4: Configure Plugin
-1. Go to **Tab 2 (Nastavitve)**
-2. Select **Uporabi CDN**
-3. Enter: `https://cdn.yourdomain.com`
-4. Save changes
+#### Korak 5: Preizkusite
+Naložite testno sliko in preverite, ali URL-ji uporabljajo `cdn.yourdomain.com`.
 
-#### Step 5: Test
-Upload a test image and verify URLs use `cdn.yourdomain.com`
-
-**Before:**
+**Prej:**
 ```html
 <img src="https://shramba.arnes.si/73:arnes-shramba/folder/image.jpg">
 ```
 
-**After:**
+**Po:**
 ```html
 <img src="https://cdn.yourdomain.com/folder/image.jpg">
 ```
 
 ---
 
-## FAQ
+## Pogosta vprašanja
 
-### General Questions
+### Splošna vprašanja
 
-**Q: Does this work with other cloud providers?**  
-A: No. This plugin is specifically designed for Arnes Shramba's unique URL structure. It won't work with AWS S3, Google Cloud, DigitalOcean, etc.
+**V: Ali to deluje tudi z drugimi ponudniki storitev v oblaku?**  
+O: Ne. Ta vtičnik je posebej zasnovan za strukturo URL-jev Arnes Shramba. Ne deluje z AWS S3, Google Cloud, DigitalOcean itd.
 
-**Q: Will this slow down my site?**  
-A: No. Serving files from S3/CDN is usually FASTER than serving from your server, especially for visitors far from your server location.
+**V: Ali bo to upočasnilo mojo spletno stran?**  
+O: Ne. Prenos datotek iz S3/CDN je običajno HITREJŠI kot prenos iz vašega strežnika, zlasti za obiskovalce, ki so daleč od lokacije vašega strežnika.
 
-**Q: What happens if Arnes Shramba goes down?**  
-A: If "Keep local files" is enabled, WordPress will serve local copies. If disabled, media won't load until S3 is back online.
+**V: Kaj se zgodi, če Arnes Shramba ne deluje?**  
+O: Če je omogočena možnost »Ohrani lokalne datoteke«, bo WordPress prenašal lokalne kopije. Če je ta možnost onemogočena, se mediji ne bodo nalagali, dokler S3 ne bo ponovno na voljo.
 
-**Q: Can I switch back to local storage?**  
-A: Yes. Use Tab 4 → Restore from S3 to download all files, then deactivate the plugin.
+**V: Ali se lahko vrnem na lokalno shranjevanje?**  
+O: Da. Uporabite zavihek Orodja → Obnova arhiva iz Arnes oblaka, da prenesete vse datoteke, nato pa deaktivirajte vtičnik.
 
-**Q: Does this work with page builders?**  
-A: Yes. Works with Gutenberg, Elementor, Divi, Beaver Builder, etc. It hooks into WordPress core.
+**V: Ali to deluje s programi za izdelavo strani?**  
+O: Da. Deluje z Gutenbergom, Elementorjem, Divijem, Beaver Builderjem itd. Poveže se z jedrom WordPressa.
 
-**Q: Will it upload my theme images?**  
-A: No. Only files uploaded through WordPress Media Library. Theme files and plugin assets are not affected.
+**V: Ali bo naložil moje slike teme?**  
+O: Ne. Samo datoteke, naložene prek knjižnice medijev WordPress. Datoteke teme in vtičniki ostanejo nespremenjeni.
 
-**Q: Can I use this on shared hosting?**  
-A: Yes, as long as your host allows external connections and meets PHP requirements.
+**V: Ali lahko to uporabljam na skupnem gostovanju?**  
+O: Da, če vaš gostitelj dovoljuje zunanje povezave in izpolnjuje zahteve PHP.
 
-**Q: Does it work with WooCommerce?**  
-A: Yes. Product images uploaded through Media Library are handled automatically.
+**V: Ali deluje z WooCommerce?**  
+O: Da. Slike izdelkov, naložene prek knjižnice medijev, se obdelajo samodejno.
 
-**Q: What about image thumbnails?**  
-A: All WordPress-generated sizes (thumbnails, medium, large, WebP, AVIF) are automatically uploaded.
+**V: Kaj pa sličice (thumbnails) slik?**  
+O: Vse velikosti, ki jih ustvari WordPress (sličice, srednje, velike, WebP, AVIF), se naložijo samodejno.
 
-**Q: Can I change S3 credentials after setup?**  
-A: Yes. Update Tab 1 fields and save. Existing files remain in S3.
+**V: Ali lahko po nastavitvi spremenim poverilnice S3?**  
+O: Da. Posodobite polja na zavihku Povezava, preverite povezavo in shranite. Obstoječe datoteke ostanejo v S3.
 
-**Q: Is there a file size limit?**  
-A: Depends on your PHP settings (`upload_max_filesize`, `post_max_size`) and Arnes Shramba limits.
+**V: Ali obstaja omejitev velikosti datotek?**  
+O: Odvisno od vaših nastavitev PHP (`upload_max_filesize`, `post_max_size`) in omejitev Arnes Shramba.
 
-**Q: Does it support video files?**  
-A: Yes. MP4, WebM, and other video formats are supported.
+**V: Ali podpira video datoteke?**  
+O: Da. Podpira MP4, WebM in druge video formate.
 
-**Q: Can I exclude certain files from upload?**  
-A: Not currently. All Media Library files are uploaded (based on auto-upload setting).
+**V: Ali lahko izključim določene datoteke iz prenosa?**  
+O: Trenutno ne. Prenesejo se vse datoteke iz medijske knjižnice (na podlagi nastavitve samodejnega prenosa).
 
-### Technical Questions
+### Tehnična vprašanja
 
-**Q: How does URL rewriting work?**  
-A: Plugin uses WordPress filters (`wp_get_attachment_url`, `wp_calculate_image_srcset`) to rewrite media URLs at PHP level. No nginx configuration needed.
+**V: Kako deluje prepisovanje URL-jev?**  
+O: Vtičnik uporablja filtre WordPress (`wp_get_attachment_url`, `wp_calculate_image_srcset`) za prepisovanje URL-jev medijev na ravni PHP. Konfiguracija nginx ni potrebna.
 
-**Q: What's the S3 URL structure?**  
-A: `https://shramba.arnes.si/{org_id}:{bucket}/{prefix}/{blog_id}/{year}/{month}/filename.ext`
+**V: Kakšna je struktura URL-ja S3?**  
+O: `https://shramba.arnes.si/{org_id}:{bucket}/{prefix}/{blog_id}/{year}/{month}/filename.ext`
 
-**Q: How is metadata stored?**  
-A: Each uploaded file gets `_arnes_s3_object` post meta with the S3 object key.
+**V: Kako se shranjujejo metapodatki?**  
+O: Vsaka naložena datoteka dobi post meta `_arnes_s3_object` s ključem objekta S3.
 
-**Q: What hook does it use for uploads?**  
-A: `wp_generate_attachment_metadata` (priority 999) - fires AFTER all image sizes are generated.
+**V: Kateri hook se uporablja za nalaganje?**  
+O: `wp_generate_attachment_metadata` (prioriteta 999) – se sproži PO tem, ko so ustvarjene vse velikosti slik.
 
-**Q: Can I use this with image optimization plugins?**  
-A: Yes, but configure carefully. The upload hook fires LAST to capture optimized files. Some optimization plugins store files in separate directories which won't be uploaded.
+**V: Ali lahko to uporabljam s plugini za optimizacijo slik?**  
+O: Da, vendar pazljivo konfigurirajte. Hook za nalaganje se sproži ZADNJI, da zajame optimizirane datoteke. Nekateri plugini za optimizacijo shranjujejo datoteke v ločenih imenikih, ki se ne bodo naložili.
 
 ---
 
-## Troubleshooting
+## Odpravljanje težav
 
-### Connection Test Failed
+### Preizkus povezave ni uspel
 
-**Error:** "Unable to connect to S3"
+**Napaka:** „Povezava s S3 ni mogoča“
 
-**Solutions:**
-1. Verify endpoint: `https://shramba.arnes.si` (include `https://`)
-2. Check access key and secret key
-3. Confirm bucket name: `arnes-shramba`
-4. Verify folder exists in Arnes Shramba
-5. Check Organization ID is correct
-6. Ensure server can make HTTPS connections
+**Rešitve:**
+1. Preverite končno točko: `https://shramba.arnes.si` (vključno z `https://`)
+2. Preverite ključ za dostop in skrivni ključ.
+3. Potrdite ime skladišča: `arnes-shramba`
+4. Preverite, ali mapa obstaja v Arnes Shramba.
+5. Preverite, ali je ID organizacije pravilen.
+6. Preverite, ali strežnik lahko vzpostavi HTTPS povezave.
 
-### Files Not Uploading
+### Datoteke se ne nalagajo
 
-**Problem:** Files upload to WordPress but not S3
+**Problem:** Datoteke se nalagajo v WordPress, vendar ne v S3.
 
-**Solutions:**
-1. Check automatic upload is enabled (Tab 2)
-2. Verify connection settings (Tab 1)
-3. Check PHP error log
-4. Ensure uploads directory is writable
-5. Check PHP memory limit (256MB+)
+**Rešitve:**
+1. Preverite, ali je omogočeno samodejno nalaganje (zavihek 2).
+2. Preverite nastavitve povezave (zavihek 1).
+3. Preverite dnevnik napak PHP
+4. Preverite, ali je imenik za nalaganje datotek mogoče zapisovati
+5. Preverite omejitev pomnilnika PHP (256 MB+)
 
 **Debug:**
 ```php
-// In wp-config.php
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-// Check /wp-content/debug.log
+// V wp-config.php
+define(‚WP_DEBUG‘, true);
+define(‚WP_DEBUG_LOG‘, true);
+// Preverite /wp-content/debug.log
 ```
 
-### Images Not Displaying
+### Slike se ne prikažejo
 
-**Problem:** Images show broken on frontend
+**Problem:** Slike se na uporabniškem vmesniku prikažejo poškodovane.
 
-**Solutions:**
-1. Verify files are in S3 (Tab 5 - Statistics)
-2. Check URL rewriting is active (Tab 2)
-3. Confirm CDN domain is correct (if using CDN)
-4. Clear browser cache and CDN cache
-5. Test S3 URL directly in browser
+**Rešitve:**
+1. Preverite, ali so datoteke v S3 (zavihek 5 – Statistični podatki).
+2. Preverite, ali je prepisovanje URL-jev aktivno (zavihek 2).
+3. Preverite, ali je domena CDN pravilna (če uporabljate CDN).
+4. Izbrišite predpomnilnik brskalnika in predpomnilnik CDN (purge cache)
+5. Preizkusite URL S3 neposredno v brskalniku.
 
-### Bulk Upload Stalls
+### Zastajanje množičnega nalaganja
 
-**Problem:** Upload stops or times out
+**Problem:** Nalaganje se ustavi ali poteče časovna omejitev.
 
-**Solutions:**
-1. Increase `max_execution_time` (300+)
-2. Increase `memory_limit` (256MB+)
-3. Check internet connection
-4. Try smaller batch size
-5. Use Resume feature
+**Rešitve:**
+1. Povečajte `max_execution_time` (300+).
+2. Povečajte `memory_limit` (256 MB+).
+3. Preverite internetno povezavo
+4. Poskusite z manjšo velikostjo serije
+5. Uporabite funkcijo Nadaljuj
 
-### WebP/AVIF Not Generating
+### WebP/AVIF se ne generira
 
-**Problem:** Only JPG/PNG uploaded
+**Problem:** Naloženi so samo JPG/PNG
 
-**Solutions:**
-1. Check Tab 5 → System Diagnostics
-2. Install Imagick: `sudo apt-get install php-imagick`
-3. Verify WordPress 6.5+
+**Rešitve:**
+1. Preverite zavihek 5 → Sistemska diagnostika
+2. Namestite Imagick: `sudo apt-get install php-imagick`
+3. Preverite WordPress 6.5+
 
-### Font Awesome Icons Not Showing
+### Ikone Font Awesome se ne prikazujejo
 
-**Problem:** Icons missing in admin interface
+**Problem:** Ikone manjkajo v administrativnem vmesniku.
 
-**Solution:**
-Icons now load from CDN and work on all domains. If still not showing:
-1. Clear browser cache
-2. Check browser console for errors
-3. Verify internet connection (CDN access)
-
----
-
-## Support
-
-### Getting Help
-
-- **Documentation:** This README
-- **GitHub Issues:** [Report bugs or request features](https://github.com/yourusername/arnes-s3/issues)
-- **Email:** info@squarebow.com
-- **Arnes Support:** For S3 credential issues, contact Arnes directly
-
-### Before Asking for Help
-
-Please provide:
-1. WordPress version
-2. PHP version
-3. Plugin version (currently 1.0.8)
-4. Error messages (from debug.log)
-5. Steps to reproduce issue
-6. Browser console errors (if frontend issue)
-
-### Known Limitations
-
-- Only works with Arnes Shramba (no other S3 providers)
-- Does not create buckets/folders automatically
-- No built-in image optimization (uses WordPress native)
-- Cannot exclude specific files from upload
-- Resume function expires after 24 hours
+**Rešitev:**
+Ikone se zdaj nalagajo iz CDN in delujejo na vseh domenah. Če se še vedno ne prikazujejo:
+1. Izbrišite predpomnilnik brskalnika.
+2. Preverite, ali v konzoli brskalnika ni napak.
+3. Preverite internetno povezavo (dostop do CDN).
 
 ---
 
-## Changelog
+## Podpora
 
-See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
+### Pomoč
 
-### Latest Version: 1.0.8 (2026-02-17)
+- **Dokumentacija:** Ta README
+- **GitHub Issues:** [Prijavite napake ali zahtevajte funkcije](https://github.com/yourusername/arnes-s3/issues)
+- **E-pošta:** info@squarebow.com
+- **Podpora Arnes:** Za težave s poverilnicami S3 se obrnite neposredno na Arnes.
 
-**Critical Fixes:**
-- ✅ Fixed endpoint default to include `https://`
-- ✅ Removed confusing organization ID placeholder
-- ✅ Statistics tab now requires configuration before displaying data
-- ✅ Font Awesome switched to CDN (works on all domains)
+### Preden zaprosite za pomoč
 
-**What's New in v1.0:**
-- ✨ Complete admin interface with 5 tabs
-- ✨ Bulk upload with progress tracking
-- ✨ Backup and restore functionality
-- ✨ Comprehensive statistics dashboard
-- ✨ Image quality controls
-- ✨ CDN support
-- ✨ Font Awesome icons
-- ✨ Slovenian localization
+Prosimo, navedite:
+1. Različico WordPressa.
+2. Različico PHP.
+3. Različico vtičnika (trenutno 1.0.8).
+4. Napake (iz debug.log).
+5. Korake za ponovitev težave.
+6. Napake v konzoli brskalnika (če gre za težavo v frontendu).
 
----
+### Znane omejitve
 
-## Credits
-
-- **Author:** Aleš Lednik, SquareBow
-- **Contributors:** Community contributors welcome
-- **AWS SDK:** Amazon Web Services (optimized for S3 only)
-- **Arnes:** Academic and Research Network of Slovenia
-- **Font Awesome:** Icon library
+- Deluje samo z Arnes Shramba (ne podpira drugih ponudnikov S3)
+- Ne ustvarja samodejno bucketov/skladišč in map
+- Ni vgrajene optimizacije slik (uporablja WordPress core)
+- Ne more izključiti določenih vrst datotek iz prenosa
+- Funkcija nadaljevanja nalaganja poteče po 24 urah
 
 ---
 
-## License
+## Dnevnik sprememb
 
-This plugin is licensed under the **GPL-2.0-or-later** license.
+Za podrobno zgodovino različic glejte [CHANGELOG.md](CHANGELOG.md).
+
+### Najnovejša različica: 1.0.8 (19. 2. 2026)
+
+**Kritične popravke:**
+- ✅ Popravljena privzeta končna točka, da vključuje `https://`
+- ✅ Odstranjen je bil zavajajoč nadomestni znak za ID organizacije
+- ✅ Zavihek Statistika zdaj zahteva konfiguracijo, preden prikaže podatke
+- ✅ Font Awesome je prešel na CDN (brez nalaganja lokalne knjižnice)
+
+**Novosti v različici 1.0:**
+- ✨ Popoln administrativni vmesnik s 5 zavihki
+- ✨ Množično nalaganje s spremljanjem napredka
+- ✨ Funkcija varnostnega kopiranja in obnovitve
+- ✨ Celovit nadzorni panel s statističnimi podatki
+- ✨ Nadzor kakovosti slik
+- ✨ Podpora CDN
+- ✨ Ikone Font Awesome
+- ✨ Slovenska lokalizacija
+
+---
+
+## Avtor
+
+- **Avtor:** Aleš Lednik, SquareBow
+- **Sodelavci:** Dobrodošli sodelavci iz skupnosti
+- **AWS SDK:** Amazon Web Services (optimizirano samo za S3)
+- **Arnes:** Akademsko-raziskovalna mreža Slovenije
+- **Font Awesome:** Knjižnica ikon
+
+---
+
+## Licenca
+
+Ta vtičnik je licenciran pod licenco **GPL-2.0-ali-novejšo**.
 
 ```
 Arnes S3 - WordPress Media Offloading Plugin
@@ -673,35 +654,35 @@ GNU General Public License for more details.
 
 ---
 
-## Disclaimer
+## Izjava o odgovornosti
 
-This plugin is not officially affiliated with or endorsed by Arnes. It is a third-party tool designed to work with Arnes Shramba services. Use at your own risk. Always backup your data before using cloud storage plugins.
-
----
-
-## Roadmap
-
-### Planned Features
-- [ ] File exclusion rules (exclude specific file types or sizes)
-- [ ] Download statistics from S3 (via CloudFront or analytics)
-- [ ] Automatic cleanup of orphaned S3 files
-- [ ] Advanced filtering in statistics
-- [ ] Export/import configuration
-- [ ] Scheduled automatic backups
-
-### Contributions Welcome
-We welcome contributions! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-Follow [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/).
+Ta vtičnik ni na noben način povezan z Arnesom niti ga Arnes ne podpira. Gre za orodje tretje osebe, ki je zasnovano za delovanje s storitvami Arnes Shramba. Uporabljajte ga na lastno odgovornost. Pred uporabo vtičnikov za shranjevanje v oblaku vedno naredite varnostno kopijo podatkov.
 
 ---
 
-**Made with ❤️ for the Slovenian WordPress community**
+## Načrt za nadgradnjo
 
-**Version:** 1.0.8  
-**Last Updated:** February 17th, 2026  
-**Status:** Production Ready ✅
+### Načrtovane funkcije
+- [ ] Pravila za izključitev datotek (izključitev določenih vrst ali velikosti datotek)
+- [ ] Prenos statistik iz S3 (prek CloudFront ali analitike)
+- [ ] Samodejno čiščenje osirotelih datotek S3
+- [ ] Napredno filtriranje v statistikah
+- [ ] Izvoz/uvoz konfiguracije
+- [ ] Načrtovane samodejne varnostne kopije
+
+### Prispevki so dobrodošli
+
+1. Uporabite fork repozitorija
+2. Ustvarite features branch
+3. Izvedite spremembe
+4. Pošljite pull request
+
+Upoštevajte [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/).
+
+---
+
+**Narejeno z ❤️ za slovensko WordPress skupnost**
+
+**Različica:** 1.0.8  
+**Zadnja posodobitev:** 19. februar 2026  
+**Stanje:** Public stable release. Pripravljeno za produkcijo ✅
