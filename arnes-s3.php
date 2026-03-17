@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Arnes S3
- * Description: Samodejno kopiranje WordPress medijskih datotek v Arnes shrambo (S3) ter nalaganje iz oblaka ali CDN. Varnostno kopiranje in obnova vseh medijskih datotek.
+ * Description: Samodejno kopiranje WordPress medijskih datotek v Arnes shrambo (generični S3) ter nalaganje iz oblaka ali CDN. Varnostno kopiranje in obnova vseh medijskih datotek.
  * Plugin URI: https://github.com/Squarebow/Arnes-S3
  * Version: 1.1
  * Author: SquareBow

@@ -8,7 +8,7 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Samodejno nalaganje medijskih datotek v Arnes Shrambo (S3) s CDN podporo, WebP/AVIF, varnostnimi kopijami in orodji za obnovitev.
+Samodejno nalaganje medijskih datotek v Arnes Shrambo (generični S3) s CDN podporo, WebP/AVIF, varnostnimi kopijami in orodji za obnovitev.
 
 ---
 
