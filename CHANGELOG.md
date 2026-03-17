@@ -13,17 +13,17 @@ različice sledijo [Semantic Versioning](https://semver.org/).
 
 #### 🔴 Kritični popravki (Errors)
 
-- **Font Awesome CDN odstranjen** – Font Awesome CDN nadomeščen z WordPress Dashicons.
+- **Font Awesome CDN odstranjen** – Font Awesome CDN nadomeščen z WP Dashicons.
 
 - **Dodani `sanitize_callback` parametri** – Dodane ustrezne sanitizacijske funkcije za vsak tip nastavitve.
 
-- **SQL poizvedba varno prepisana** – Nova poizvedba nadomeščena z WordPress idiomatičnim pristopom `get_posts()` z `WP_Query` argumenti – brez neposrednega SQL-a.
+- **SQL poizvedba varno prepisana** – Nova poizvedba nadomeščena z WP pristopom `get_posts()` z `WP_Query` argumenti – brez neposrednega SQL-a.
 
 - **`unlink()` nadomeščen z `wp_delete_file()`** – `wp_delete_file()` namesto `unlink()` za brisanje datotek.
 
 - **`date()` nadomeščena z `gmdate()`** – Sistemska časovna cona je neodvisna od časovnih pasov.
 
-- **Vsi nezaščiteni izhodi (`echo`) zaščiteni** – Pregled vseh izpisov v admin vmesniku in wrapping z ustreznimi funkcijami: `esc_html()` za besedilne vrednosti, `esc_attr()` za atribute, `esc_url()` za URL-je, `wp_kses()` za HTML z ikonami.
+- **Vsi nezaščiteni izhodi (`echo`) zaščiteni** – Pregled vseh izpisov v admin vmesniku in wrapping z ustreznimi funkcijami: `esc_html()` za besedilo, `esc_attr()` za atribute, `esc_url()` za URL-je, `wp_kses()` za HTML z ikonami.
 
 #### 🟡 Opozorila in priporočila (Warnings)
 
