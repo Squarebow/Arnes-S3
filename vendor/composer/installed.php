@@ -3,7 +3,7 @@
         'name' => 'squarebow/arnes-s3',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1215b3b54dd6bde7bdb619c1c40954a68bd089ca',
+        'reference' => 'b3814f1ca7f89f74ffd80c138f45889a28ca01cf',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -121,7 +121,7 @@
         'squarebow/arnes-s3' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1215b3b54dd6bde7bdb619c1c40954a68bd089ca',
+            'reference' => 'b3814f1ca7f89f74ffd80c138f45889a28ca01cf',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
