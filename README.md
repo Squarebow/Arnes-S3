@@ -1,4 +1,4 @@
-# Arnes S3 - WordPress Media Offloading vtičnik
+# Arnes S3 - WordPress Media Offloading
 
 **Vtičnik za samodejno ali ročno nalaganje medijskih datotek iz WordPressa v Arnes Web Storage (generični AWS S3 bucket). Podpira CDN, sodobne oblike slik (WebP in AVIF), varnostne kopije in obnovitev iz arhivov.**
 
