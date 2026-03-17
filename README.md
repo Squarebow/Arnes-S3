@@ -46,7 +46,7 @@ Vtičnik se brezhibno integrira v medijsko knjižnico WordPress, kar vam omogoč
 - ✅ Prenos medijskih datotek v oblak za shranjevanje, da prihranite prostor na disku.
 - ✅ Prenos datotek neposredno iz S3 ali prek CDN za hitrejšo dostavo.
 - ✅ Množični prenos obstoječe medijske knjižnice v S3.
-- ✅ Spremljanje porabe prostora za shranjevanje s celovitimi statistikami.
+- ✅ Spremljanje porabe prostora za shranjevanje z uporabno statistiko.
 - ✅ Varnostno kopiranje in obnovitev celotne medijske knjižnice.
 
 ---
