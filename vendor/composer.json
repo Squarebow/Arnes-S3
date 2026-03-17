@@ -1,0 +1,13 @@
+{
+    "name": "arnes/arnes-s3",
+    "description": "WordPress plugin for Arnes S3 storage",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "SquareBow"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
