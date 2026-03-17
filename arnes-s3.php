@@ -7,7 +7,7 @@
  * Author: SquareBow
  * License: GPL-2.0-or-later
  * Requires at least: 6.5
- * Requires PHP: 8.0
+ * Requires PHP: 8.1
  * Tested up to: 6.9
  * Text Domain: arnes-s3
  * License: GPLv2 or later
