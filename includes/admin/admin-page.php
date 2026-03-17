@@ -70,8 +70,8 @@ function arnes_s3_admin_assets( $hook ) {
 
 function arnes_s3_render_admin_page() {
 
-	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'povezava';
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- tab je samo navigacijski parameter brez varnostnih posledic
+	$active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'povezava';
 	?>
 	<style>
 		.arnes-icon        { margin-right: 6px; color: #2271b1; font-size: 18px; vertical-align: middle; }
