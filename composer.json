@@ -4,14 +4,17 @@
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "aws/aws-sdk-php": "^3.369"
     },
     "config": {
         "optimize-autoloader": true,
         "classmap-authoritative": true,
         "apcu-autoloader": false,
-        "platform-check": false
+        "platform-check": false,
+        "platform": {
+            "php": "8.0"
+        }
     },
     "autoload": {
         "files": []
