@@ -18,18 +18,58 @@ if ( ! defined( 'ABSPATH' ) ) {
 function arnes_s3_register_settings() {
 
 	/**
-	 * Registracija posameznih nastavitev
+	 * Registracija posameznih nastavitev - vse z ustreznimi sanitize_callback funkcijami
 	 */
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_endpoint' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_bucket' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_prefix' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_org_id' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_access_key' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_secret_key' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_keep_local' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_cdn_domain' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_serve_mode' );
-	register_setting( 'arnes_s3_settings_group', 'arnes_s3_auto_upload' );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_endpoint', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_url',
+		'default'           => 'https://shramba.arnes.si',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_bucket', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => 'arnes-shramba',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_prefix', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_org_id', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_access_key', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_secret_key', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_keep_local', [
+		'type'              => 'integer',
+		'sanitize_callback' => 'absint',
+		'default'           => 1,
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_cdn_domain', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_url',
+		'default'           => '',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_serve_mode', [
+		'type'              => 'string',
+		'sanitize_callback' => 'arnes_s3_sanitize_serve_mode',
+		'default'           => 'arnes',
+	] );
+	register_setting( 'arnes_s3_settings_group', 'arnes_s3_auto_upload', [
+		'type'              => 'integer',
+		'sanitize_callback' => 'absint',
+		'default'           => 1,
+	] );
 	
 	// Image Quality Settings (Phase 4.1)
 	register_setting( 'arnes_s3_settings_group', 'arnes_s3_jpeg_quality', [
@@ -271,6 +311,19 @@ function arnes_s3_sanitize_format_priority( $value ) {
 	
 	if ( ! in_array( $value, $allowed_values, true ) ) {
 		return 'webp_first'; // Default
+	}
+	
+	return $value;
+}
+
+/**
+ * Sanitize funkcija za serve mode
+ */
+function arnes_s3_sanitize_serve_mode( $value ) {
+	$allowed_values = [ 'arnes', 'cdn' ];
+	
+	if ( ! in_array( $value, $allowed_values, true ) ) {
+		return 'arnes'; // Default
 	}
 	
 	return $value;

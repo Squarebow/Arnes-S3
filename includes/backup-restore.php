@@ -83,7 +83,6 @@ function arnes_s3_scan_for_backup( $options = [] ) {
 		
 		// Thumbnails in različne velikosti
 		if ( ! empty( $metadata['sizes'] ) && $options['include_optimized'] ) {
-			$upload_dir = wp_upload_dir();
 			$base_dir = dirname( $file_path );
 			
 			foreach ( $metadata['sizes'] as $size_name => $size_data ) {
@@ -128,8 +127,9 @@ function arnes_s3_create_backup_zip( $files, $options = [] ) {
 		);
 	}
 	
+	// Uporabimo gmdate() namesto date() za neodvisnost od časovnih pasov
 	$defaults = [
-		'filename' => 'arnes-s3-backup-' . date( 'Y-m-d-His' ) . '.zip',
+		'filename' => 'arnes-s3-backup-' . gmdate( 'Y-m-d-His' ) . '.zip',
 	];
 	
 	$options = wp_parse_args( $options, $defaults );
@@ -210,6 +210,10 @@ function arnes_s3_get_existing_backups() {
 	$files = glob( $backup_dir . '/*.zip' );
 	$backups = [];
 	
+	if ( ! $files ) {
+		return [];
+	}
+	
 	foreach ( $files as $file ) {
 		$backups[] = [
 			'filename' => basename( $file ),
@@ -239,7 +243,8 @@ function arnes_s3_delete_backup( $filename ) {
 	$backup_path = $upload_dir['basedir'] . '/arnes-s3-backups/' . basename( $filename );
 	
 	if ( file_exists( $backup_path ) ) {
-		return unlink( $backup_path );
+		wp_delete_file( $backup_path );
+		return ! file_exists( $backup_path );
 	}
 	
 	return false;
@@ -267,7 +272,7 @@ function arnes_s3_scan_for_restore( $options = [] ) {
 	}
 	
 	// Pridobi vse attachments ki imajo S3 object key
-	$attachments = get_posts( [
+	$attachments = get_posts( [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		'post_type'      => 'attachment',
 		'post_status'    => 'inherit',
 		'posts_per_page' => -1,
@@ -398,7 +403,7 @@ function arnes_s3_restore_file( $file ) {
 		] );
 		
 		// Zapiši v lokalno datoteko
-		file_put_contents( $file['local_path'], $result['Body'] );
+		file_put_contents( $file['local_path'], $result['Body'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		
 		return true;
 		
@@ -478,7 +483,7 @@ function arnes_s3_scan_for_metadata_sync() {
 	}
 	
 	// Pridobi vse attachments ki NIMAJO S3 meta
-	$attachments = get_posts( [
+	$attachments = get_posts( [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		'post_type'      => 'attachment',
 		'post_status'    => 'inherit',
 		'posts_per_page' => -1,
@@ -572,7 +577,7 @@ function arnes_s3_scan_for_local_delete() {
 	}
 	
 	// Pridobi vse attachments ki imajo S3 meta
-	$attachments = get_posts( [
+	$attachments = get_posts( [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		'post_type'      => 'attachment',
 		'post_status'    => 'inherit',
 		'posts_per_page' => -1,
@@ -668,7 +673,9 @@ function arnes_s3_delete_local_files( $files ) {
 		if ( file_exists( $file['local_path'] ) ) {
 			$size = filesize( $file['local_path'] );
 			
-			if ( unlink( $file['local_path'] ) ) {
+			wp_delete_file( $file['local_path'] );
+			
+			if ( ! file_exists( $file['local_path'] ) ) {
 				$deleted++;
 				$freed_space += $size;
 			} else {

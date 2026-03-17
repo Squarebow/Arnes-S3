@@ -3,11 +3,11 @@
  * Plugin Name: Arnes S3
  * Description: Samodejno kopiranje WordPress medijskih datotek v Arnes shrambo (S3) ter nalaganje iz oblaka ali CDN. Varnostno kopiranje in obnova vseh medijskih datotek.
  * Plugin URI: https://github.com/Squarebow/Arnes-S3
- * Version: 1.0.8
+ * Version: 1.1
  * Author: SquareBow
  * License: GPL-2.0-or-later
  * Requires at least: 6.5
- * Requires PHP: 7.4
+ * Requires PHP: 8.0
  * Tested up to: 6.9
  * Text Domain: arnes-s3
  * License: GPLv2 or later
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 define( 'ARNES_S3_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ARNES_S3_URL', plugin_dir_url( __FILE__ ) );
-define( 'ARNES_S3_VERSION', '1.0.8' );
+define( 'ARNES_S3_VERSION', '1.1' );
 
 /**
  * Vključi AWS SDK in core komponente

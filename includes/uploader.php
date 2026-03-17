@@ -83,8 +83,10 @@ function arnes_s3_handle_upload( $metadata, $attachment_id ) {
 		// Preveri če je file v year/month directory strukturi
 		// Regex pattern: /uploads/YYYY/MM/filename.zip
 		if ( ! preg_match( '#/uploads/\d{4}/\d{2}/#', $file ) ) {
-			// ZIP file NIJE v year/month strukturi → verjetno plugin ZIP
-			error_log( '[Arnes S3] Skipping non-media ZIP file: ' . basename( $file ) );
+			// ZIP file ni v year/month strukturi → verjetno plugin ZIP
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				error_log( '[Arnes S3] Skipping non-media ZIP file: ' . basename( $file ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			}
 			return $metadata; // Ignoriraj
 		}
 		// Če je ZIP v year/month strukturi → legit user upload, nadaljuj
@@ -239,7 +241,7 @@ function arnes_s3_handle_upload( $metadata, $attachment_id ) {
 		if ( ! $settings['keep_local'] ) {
 			// Izbriši original
 			if ( file_exists( $file ) ) {
-				@unlink( $file );
+				wp_delete_file( $file );
 			}
 			
 			// Izbriši vse sizes
@@ -247,7 +249,7 @@ function arnes_s3_handle_upload( $metadata, $attachment_id ) {
 				foreach ( $metadata['sizes'] as $size_data ) {
 					$size_file = $file_dir . '/' . $size_data['file'];
 					if ( file_exists( $size_file ) ) {
-						@unlink( $size_file );
+						wp_delete_file( $size_file );
 					}
 				}
 			}
@@ -255,36 +257,40 @@ function arnes_s3_handle_upload( $metadata, $attachment_id ) {
 			// Izbriši WebP/AVIF
 			foreach ( $format_files as $format_file ) {
 				if ( file_exists( $format_file ) ) {
-					@unlink( $format_file );
+					wp_delete_file( $format_file );
 				}
 			}
 		}
 		
 		
 		// ======================================
-		// Log rezultate
+		// Log rezultate (samo v debug načinu)
 		// ======================================
 		
-		if ( ! empty( $uploaded_files ) ) {
-			error_log( sprintf(
-				'[Arnes S3] Successfully uploaded %d files for attachment ID %d: %s',
-				count( $uploaded_files ),
-				$attachment_id,
-				implode( ', ', $uploaded_files )
-			) );
-		}
-		
-		if ( ! empty( $failed_files ) ) {
-			error_log( sprintf(
-				'[Arnes S3] Failed uploads for attachment ID %d: %s',
-				$attachment_id,
-				implode( '; ', $failed_files )
-			) );
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			if ( ! empty( $uploaded_files ) ) {
+				error_log( sprintf( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+					'[Arnes S3] Successfully uploaded %d files for attachment ID %d: %s',
+					count( $uploaded_files ),
+					$attachment_id,
+					implode( ', ', $uploaded_files )
+				) );
+			}
+			
+			if ( ! empty( $failed_files ) ) {
+				error_log( sprintf( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+					'[Arnes S3] Failed uploads for attachment ID %d: %s',
+					$attachment_id,
+					implode( '; ', $failed_files )
+				) );
+			}
 		}
 
 	} catch ( Exception $e ) {
 		// Catch-all za unexpected errors
-		error_log( '[Arnes S3] Unexpected error: ' . $e->getMessage() );
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( '[Arnes S3] Unexpected error: ' . $e->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
 	}
 	
 	// POMEMBNO: Vedno vrni metadata nespremenjene!

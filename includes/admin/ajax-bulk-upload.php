@@ -26,11 +26,11 @@ function arnes_s3_ajax_scan_library() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja za to akcijo.' ] );
 	}
 	
-	// Pridobi filtre iz POST data
+	// Pridobi filtre iz POST data - wp_unslash() pred sanitizacijo
 	$filters = [
-		'date_from'    => isset( $_POST['date_from'] ) ? sanitize_text_field( $_POST['date_from'] ) : '',
-		'date_to'      => isset( $_POST['date_to'] ) ? sanitize_text_field( $_POST['date_to'] ) : '',
-		'mime_type'    => isset( $_POST['mime_type'] ) ? sanitize_text_field( $_POST['mime_type'] ) : 'all',
+		'date_from'    => isset( $_POST['date_from'] ) ? sanitize_text_field( wp_unslash( $_POST['date_from'] ) ) : '',
+		'date_to'      => isset( $_POST['date_to'] ) ? sanitize_text_field( wp_unslash( $_POST['date_to'] ) ) : '',
+		'mime_type'    => isset( $_POST['mime_type'] ) ? sanitize_text_field( wp_unslash( $_POST['mime_type'] ) ) : 'all',
 		'min_size'     => isset( $_POST['min_size'] ) ? floatval( $_POST['min_size'] ) : 0,
 		'max_size'     => isset( $_POST['max_size'] ) ? floatval( $_POST['max_size'] ) : 0,
 		'only_missing' => isset( $_POST['only_missing'] ) && $_POST['only_missing'] === 'true',
@@ -65,7 +65,7 @@ function arnes_s3_ajax_bulk_upload_batch() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja za to akcijo.' ] );
 	}
 	
-	// Pridobi file IDs iz POST data
+	// Pridobi file IDs iz POST data - varno z absint() za vsak ID
 	$file_ids = isset( $_POST['file_ids'] ) ? array_map( 'absint', (array) $_POST['file_ids'] ) : [];
 	$is_dry_run = isset( $_POST['dry_run'] ) && $_POST['dry_run'] === 'true';
 	
@@ -129,10 +129,11 @@ function arnes_s3_ajax_save_state() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja za to akcijo.' ] );
 	}
 	
-	// Pridobi state iz POST data
-	$state = isset( $_POST['state'] ) ? json_decode( stripslashes( $_POST['state'] ), true ) : [];
+	// Pridobi state iz POST data - wp_unslash() + json_decode za varno deserializacijo
+	$state_raw = isset( $_POST['state'] ) ? wp_unslash( $_POST['state'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$state = json_decode( $state_raw, true );
 	
-	if ( empty( $state ) ) {
+	if ( ! is_array( $state ) || empty( $state ) ) {
 		wp_send_json_error( [ 'message' => 'Neveljaven state.' ] );
 	}
 	
@@ -203,7 +204,7 @@ function arnes_s3_ajax_save_bulk_result() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja za to akcijo.' ] );
 	}
 	
-	// Pridobi results iz POST data
+	// Pridobi results iz POST data - absint() za numerične vrednosti
 	$results = [
 		'total_files'   => isset( $_POST['total_files'] ) ? absint( $_POST['total_files'] ) : 0,
 		'success_count' => isset( $_POST['success_count'] ) ? absint( $_POST['success_count'] ) : 0,

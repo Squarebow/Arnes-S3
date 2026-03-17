@@ -23,9 +23,12 @@ function arnes_s3_ajax_backup_scan() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	$source = isset( $_POST['source'] ) ? sanitize_text_field( $_POST['source'] ) : 'local';
+	// wp_unslash() pred sanitizacijo
+	$source = isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : 'local';
 	$include_optimized = isset( $_POST['include_optimized'] ) ? (bool) $_POST['include_optimized'] : true;
-	$file_types = isset( $_POST['file_types'] ) ? array_map( 'sanitize_text_field', $_POST['file_types'] ) : [ 'image', 'application', 'font', 'video', 'other' ];
+	$file_types = isset( $_POST['file_types'] ) && is_array( $_POST['file_types'] )
+		? array_map( 'sanitize_text_field', wp_unslash( $_POST['file_types'] ) )
+		: [ 'image', 'application', 'font', 'video', 'other' ];
 	
 	$results = arnes_s3_scan_for_backup( [
 		'source'            => $source,
@@ -50,10 +53,12 @@ function arnes_s3_ajax_backup_create() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	// Pridobi opcije
-	$source = isset( $_POST['source'] ) ? sanitize_text_field( $_POST['source'] ) : 'local';
+	// Pridobi opcije - wp_unslash() pred sanitizacijo
+	$source = isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : 'local';
 	$include_optimized = isset( $_POST['include_optimized'] ) ? (bool) $_POST['include_optimized'] : true;
-	$file_types = isset( $_POST['file_types'] ) ? array_map( 'sanitize_text_field', $_POST['file_types'] ) : [ 'image', 'application', 'font', 'video', 'other' ];
+	$file_types = isset( $_POST['file_types'] ) && is_array( $_POST['file_types'] )
+		? array_map( 'sanitize_text_field', wp_unslash( $_POST['file_types'] ) )
+		: [ 'image', 'application', 'font', 'video', 'other' ];
 	
 	// Skeniraj datoteke
 	$scan_results = arnes_s3_scan_for_backup( [
@@ -109,7 +114,7 @@ function arnes_s3_ajax_backup_delete() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	$filename = isset( $_POST['filename'] ) ? sanitize_file_name( $_POST['filename'] ) : '';
+	$filename = isset( $_POST['filename'] ) ? sanitize_file_name( wp_unslash( $_POST['filename'] ) ) : '';
 	
 	if ( empty( $filename ) ) {
 		wp_send_json_error( [ 'message' => 'Manjka ime datoteke.' ] );
@@ -138,8 +143,11 @@ function arnes_s3_ajax_restore_scan() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	$mode = isset( $_POST['mode'] ) ? sanitize_text_field( $_POST['mode'] ) : 'missing';
-	$file_types = isset( $_POST['file_types'] ) && is_array( $_POST['file_types'] ) ? array_map( 'sanitize_text_field', $_POST['file_types'] ) : [ 'image', 'application', 'font', 'video', 'other' ];
+	// wp_unslash() pred sanitizacijo
+	$mode = isset( $_POST['mode'] ) ? sanitize_text_field( wp_unslash( $_POST['mode'] ) ) : 'missing';
+	$file_types = isset( $_POST['file_types'] ) && is_array( $_POST['file_types'] )
+		? array_map( 'sanitize_text_field', wp_unslash( $_POST['file_types'] ) )
+		: [ 'image', 'application', 'font', 'video', 'other' ];
 	
 	// Če je file_types prazen array, uporabi vse tipe
 	if ( empty( $file_types ) ) {
@@ -172,10 +180,11 @@ function arnes_s3_ajax_restore_process() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	// Pridobi batch datotek za restore
-	$files = isset( $_POST['files'] ) ? json_decode( stripslashes( $_POST['files'] ), true ) : [];
+	// Pridobi batch datotek za restore - wp_unslash() + json_decode za varno deserializacijo
+	$files_raw = isset( $_POST['files'] ) ? wp_unslash( $_POST['files'] ) : '[]'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$files = json_decode( $files_raw, true );
 	
-	if ( empty( $files ) ) {
+	if ( ! is_array( $files ) || empty( $files ) ) {
 		wp_send_json_error( [ 'message' => 'Ni datotek za restore.' ] );
 	}
 	
@@ -237,9 +246,11 @@ function arnes_s3_ajax_sync_fix() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	$items = isset( $_POST['items'] ) ? json_decode( stripslashes( $_POST['items'] ), true ) : [];
+	// wp_unslash() + json_decode za varno deserializacijo
+	$items_raw = isset( $_POST['items'] ) ? wp_unslash( $_POST['items'] ) : '[]'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$items = json_decode( $items_raw, true );
 	
-	if ( empty( $items ) ) {
+	if ( ! is_array( $items ) || empty( $items ) ) {
 		wp_send_json_error( [ 'message' => 'Ni podatkov za popravilo.' ] );
 	}
 	
@@ -281,9 +292,11 @@ function arnes_s3_ajax_local_delete_process() {
 		wp_send_json_error( [ 'message' => 'Nimate dovoljenja.' ] );
 	}
 	
-	$files = isset( $_POST['files'] ) ? json_decode( stripslashes( $_POST['files'] ), true ) : [];
+	// wp_unslash() + json_decode za varno deserializacijo
+	$files_raw = isset( $_POST['files'] ) ? wp_unslash( $_POST['files'] ) : '[]'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$files = json_decode( $files_raw, true );
 	
-	if ( empty( $files ) ) {
+	if ( ! is_array( $files ) || empty( $files ) ) {
 		wp_send_json_error( [ 'message' => 'Ni datotek za brisanje.' ] );
 	}
 	

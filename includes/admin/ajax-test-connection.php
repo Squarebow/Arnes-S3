@@ -24,12 +24,13 @@ function arnes_s3_ajax_test_connection() {
 
 	check_ajax_referer( 'arnes_s3_test_nonce', 'nonce' );
 
+	// wp_unslash() pred sanitizacijo kot zahteva WordPress coding standards
 	$settings = [
-		'endpoint'    => sanitize_text_field( $_POST['endpoint'] ?? '' ),
-		'bucket'      => sanitize_text_field( $_POST['bucket'] ?? '' ),
-		'prefix'      => sanitize_text_field( $_POST['prefix'] ?? '' ),
-		'access_key'  => sanitize_text_field( $_POST['access_key'] ?? '' ),
-		'secret_key'  => sanitize_text_field( $_POST['secret_key'] ?? '' ),
+		'endpoint'    => sanitize_text_field( wp_unslash( $_POST['endpoint'] ?? '' ) ),
+		'bucket'      => sanitize_text_field( wp_unslash( $_POST['bucket'] ?? '' ) ),
+		'prefix'      => sanitize_text_field( wp_unslash( $_POST['prefix'] ?? '' ) ),
+		'access_key'  => sanitize_text_field( wp_unslash( $_POST['access_key'] ?? '' ) ),
+		'secret_key'  => sanitize_text_field( wp_unslash( $_POST['secret_key'] ?? '' ) ),
 	];
 
 	require_once ARNES_S3_PATH . 'includes/s3-client.php';
@@ -41,7 +42,7 @@ function arnes_s3_ajax_test_connection() {
 	$status = [
 		'success'   => $result['success'],
 		'message'   => $result['message'],
-		'timestamp' => current_time( 'timestamp' ),
+		'timestamp' => current_time( 'timestamp' ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 	];
 	update_option( 'arnes_s3_connection_status', $status );
 	update_option( 'arnes_s3_connection_tested', true );

@@ -29,19 +29,25 @@ function arnes_s3_scan_media_library( $filters = [] ) {
 	
 	global $wpdb;
 	
-	// Build SQL query
-	$sql = "SELECT ID, post_mime_type, post_date FROM {$wpdb->posts} WHERE post_type = 'attachment'";
+	// Zberemo WHERE pogoje in parametre ločeno za varne prepared queries
+	$where_clauses = [];
+	$query_params  = [];
 	
-	// Filter po datumu (od)
+	// Osnovna baza - varno ker gre za hardkodirano vrednost
+	$where_clauses[] = "post_type = 'attachment'";
+	
+	// Filter po datumu (od) - uporabi prepare() za vsak dinamičen parameter
 	if ( ! empty( $filters['date_from'] ) ) {
 		$date_from = sanitize_text_field( $filters['date_from'] );
-		$sql .= $wpdb->prepare( " AND post_date >= %s", $date_from );
+		$where_clauses[] = 'post_date >= %s';
+		$query_params[]  = $date_from;
 	}
 	
 	// Filter po datumu (do)
 	if ( ! empty( $filters['date_to'] ) ) {
 		$date_to = sanitize_text_field( $filters['date_to'] );
-		$sql .= $wpdb->prepare( " AND post_date <= %s", $date_to . ' 23:59:59' );
+		$where_clauses[] = 'post_date <= %s';
+		$query_params[]  = $date_to . ' 23:59:59';
 	}
 	
 	// Filter po MIME tipu
@@ -50,15 +56,34 @@ function arnes_s3_scan_media_library( $filters = [] ) {
 		
 		// Če je mime_type "image", išči vse image/* tipe
 		if ( $mime_type === 'image' ) {
-			$sql .= " AND post_mime_type LIKE 'image/%'";
+			$where_clauses[] = "post_mime_type LIKE 'image/%'";
 		} else {
-			$sql .= $wpdb->prepare( " AND post_mime_type = %s", $mime_type );
+			$where_clauses[] = 'post_mime_type = %s';
+			$query_params[]  = $mime_type;
 		}
 	}
 	
-	$sql .= " ORDER BY post_date DESC";
+	// Sestavimo SQL
+	$where_sql = 'WHERE ' . implode( ' AND ', $where_clauses );
 	
-	$attachments = $wpdb->get_results( $sql );
+	// Celoten SQL sestavimo z prepare() samo kadar imamo dinamične parametre
+	if ( ! empty( $query_params ) ) {
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$sql = $wpdb->prepare(
+			"SELECT ID, post_mime_type, post_date FROM {$wpdb->posts} {$where_sql} ORDER BY post_date DESC", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			...$query_params
+		);
+	} else {
+		$sql = "SELECT ID, post_mime_type, post_date FROM {$wpdb->posts} WHERE post_type = 'attachment' ORDER BY post_date DESC";
+	}
+	
+	// Izvedemo poizvedbo z wp_cache za zmanjšanje obremenitve baze
+	$cache_key = 'arnes_s3_scan_' . md5( $sql );
+	$attachments = wp_cache_get( $cache_key, 'arnes_s3' );
+	if ( false === $attachments ) {
+		$attachments = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared
+		wp_cache_set( $cache_key, $attachments, 'arnes_s3', 60 ); // 60 sekund cache
+	}
 	
 	$files = [];
 	$total_size = 0;
@@ -319,9 +344,11 @@ function arnes_s3_delete_bulk_state() {
  */
 function arnes_s3_format_bytes( $bytes ) {
 	$units = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+	$i = 0;
 	
-	for ( $i = 0; $bytes > 1024 && $i < count( $units ) - 1; $i++ ) {
+	while ( $bytes > 1024 && $i < count( $units ) - 1 ) {
 		$bytes /= 1024;
+		$i++;
 	}
 	
 	return round( $bytes, 2 ) . ' ' . $units[ $i ];
