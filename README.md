@@ -1,6 +1,6 @@
 === Arnes S3 ===
 Contributors: SquareBow
-Tags: s3, media, arnes, cloud, offload, shramba
+Tags: s3, media, arnes, cloud, offload
 Requires at least: 6.5
 Tested up to: 6.9
 Stable tag: 1.1
