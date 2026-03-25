@@ -1,17 +1,3 @@
-=== Arnes S3 ===
-Contributors: SquareBow
-Tags: s3, media, arnes, cloud, offload
-Requires at least: 6.5
-Tested up to: 6.9
-Stable tag: 1.1
-Requires PHP: 8.1
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-
-Samodejno nalaganje medijskih datotek v Arnes Shrambo (generični S3) s CDN podporo, WebP/AVIF, varnostnimi kopijami in orodji za obnovitev.
-
----
-
 # Arnes S3 - Media Offloading and CDN
 
 **Vtičnik za samodejno ali ročno nalaganje medijskih datotek iz WordPressa v Arnes Web Storage (generični AWS S3 bucket). Podpira CDN, sodobne oblike slik (WebP in AVIF), varnostne kopije in obnovitev iz arhivov.**
