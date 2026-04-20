@@ -85,8 +85,10 @@ function arnes_s3_rewrite_image_src( $image, $attachment_id, $size, $icon ) {
 		return $image;
 	}
 	
-	// Rewrite samo URL (index 0), ostalo pusti nespremenjeno (width, height, is_intermediate)
-	$image[0] = arnes_s3_build_url( $object_key );
+	// Rewrite URL (index 0)
+	$size_filename   = basename( $image[0] );
+	$size_object_key = dirname( $object_key ) . '/' . $size_filename;
+	$image[0]        = arnes_s3_build_url( $size_object_key );
 	
 	return $image;
 }
