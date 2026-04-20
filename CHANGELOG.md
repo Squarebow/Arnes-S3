@@ -7,6 +7,10 @@ različice sledijo [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.2] – 2026-04-20
+
+### Popravljen prikaz slik v Gutenberg blokih** – `arnes_s3_rewrite_image_src` je napačno vračala URL originalne datoteke za vse zahtevane velikosti (thumbnail, medium, large itd.), namesto URL-ja specifične velikosti.
+
 ## [1.1] – 2026-03-17
 
 ### Popravki varnosti in kakovosti kode
