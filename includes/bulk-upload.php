@@ -228,11 +228,15 @@ function arnes_s3_upload_single_file( $attachment_id ) {
 		$pattern1 = $file_dir . '/' . $file_name . '.{webp,avif}';
 		$pattern2 = $file_dir . '/' . $file_base . '-*.' . $file_ext . '.{webp,avif}';
 		$pattern3 = $file_dir . '/' . $file_base . '-*-' . $file_ext . '.{webp,avif}';
+
+		// Pattern 4: WordPress 6.5+ full-size WebP/AVIF (image-png.webp, image-jpg.avif)
+		$pattern4 = $file_dir . '/' . $file_base . '-' . $file_ext . '.{webp,avif}';
 		
 		$format_files = array_merge(
 			glob( $pattern1, GLOB_BRACE ) ?: [],
 			glob( $pattern2, GLOB_BRACE ) ?: [],
-			glob( $pattern3, GLOB_BRACE ) ?: []
+			glob( $pattern3, GLOB_BRACE ) ?: [],
+			glob( $pattern4, GLOB_BRACE ) ?: []
 		);
 		
 		$format_files = array_unique( $format_files );

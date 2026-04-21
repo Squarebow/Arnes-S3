@@ -301,4 +301,4 @@ Ta vtičnik ni na noben način povezan z Arnesom niti ga Arnes ne podpira. Gre z
 
 **Narejeno z ❤️ za slovensko WordPress skupnost**
 
-**Različica:** 1.1 | **Zadnja posodobitev:** 17. marec 2026
+**Različica:** 1.3 | **Zadnja posodobitev:** 21. april 2026

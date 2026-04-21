@@ -200,11 +200,15 @@ function arnes_s3_handle_upload( $metadata, $attachment_id ) {
 		
 		// Pattern 3: Alternate naming (image-300x200-jpg.webp - brez pike pred jpg)
 		$pattern3 = $file_dir . '/' . $file_base . '-*-' . $file_ext . '.{webp,avif}';
+
+		// Pattern 4: WordPress 6.5+ full-size WebP/AVIF (image-png.webp, image-jpg.avif)
+		$pattern4 = $file_dir . '/' . $file_base . '-' . $file_ext . '.{webp,avif}';
 		
 		$format_files = array_merge(
 			glob( $pattern1, GLOB_BRACE ) ?: array(),
 			glob( $pattern2, GLOB_BRACE ) ?: array(),
-			glob( $pattern3, GLOB_BRACE ) ?: array()
+			glob( $pattern3, GLOB_BRACE ) ?: array(),
+			glob( $pattern4, GLOB_BRACE ) ?: array()
 		);
 		
 		// Remove duplicates
